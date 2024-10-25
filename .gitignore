@@ -1,4 +1,7 @@
 vendor
 elementor
+Divi
+
+*.test.*
 
 .DS_Store
