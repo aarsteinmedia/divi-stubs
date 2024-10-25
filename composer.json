@@ -1,0 +1,22 @@
+{
+    "name": "aarsteinmedia/divi-stubs",
+    "description": "DIVI function, class, and global variable declaration stubs for easier static analysis.",
+    "homepage": "https://github.com/aarsteinmedia/divi-stubs",
+    "keywords": [
+        "divi",
+        "static analysis"
+    ],
+    "require-dev": {
+        "php": "^7.1",
+        "ext-gettext": "*",
+        "giacocorsiglia/stubs-generator": "^0.5.0"
+    },
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Johan Martin Aarstein",
+            "email": "johan@aarstein.media"
+        }
+    ],
+    "minimum-stability": "stable"
+}
