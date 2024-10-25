@@ -42,7 +42,7 @@ This package is versioned to match the DIVI version from which the stubs are gen
 You should be running PHP 7.1 or later to follow these steps, so any function definitions that are polyfills for older versions of PHP are excluded from the stubs.  Additionally, the Stubs Generator package at least requires PHP 7.1.
 
 1. Clone this repository and `cd` into it.
-2. Download DIVI plugin source from wordpress.org & place it inside this project.
+2. Download DIVI theme source from [Elegant Themes](https://www.elegantthemes.com) & place it inside this project.
 3. Run `composer install`
 4. Run `./generate.sh`
 
