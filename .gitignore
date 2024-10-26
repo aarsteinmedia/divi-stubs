@@ -3,5 +3,6 @@ elementor
 Divi
 
 *.test.*
+.vscode
 
 .DS_Store
