@@ -22,6 +22,116 @@ namespace ET\Builder\Framework\DependencyManagement\Interfaces {
 	}
 }
 
+namespace ET\Builder\VisualBuilder\Assets {
+	class PackageBuildManager implements \ET\Builder\Framework\DependencyManagement\Interfaces\DependencyInterface {
+		/**
+		 * Registry of registered package builds.
+		 *
+		 * @var array
+		 */
+		private static $_package_builds = array();
+
+		/**
+		 * Package builds' scripts and styles that are registered to be enqueued on top window.
+		 *
+		 * @var array
+		 */
+		private static $_top_window = array();
+
+		/**
+		 * Package builds' scripts and styles that are registered to be enqueued on app window.
+		 *
+		 * @var array
+		 */
+		private static $_app_window = array();
+
+		/**
+		 * Defer specific stylesheets.
+		 *
+		 * @var array
+		 */
+		private static $_deferred_styles = array();
+
+
+		/**
+		 * Method that is automatically loaded by class which implements `DependencyInterface`
+		 *
+		 * @since ??
+		 */
+		public function load() {}
+
+		/**
+		 * Register divi package builds.
+		 *
+		 * @since ??
+		 */
+		public static function register_divi_package_builds() {}
+
+		/**
+		 * Register divi package build.
+		 *
+		 * @since ??
+		 *
+		 * @param array $params Package build's params.
+		 */
+		public static function register_package_build( $params ) {}
+
+		/**
+		 * Register divi package build.
+		 *
+		 * @since ??
+		 *
+		 * @param array $params Package build's params.
+		 */
+		public static function register_divi_package_build( $params ) {}
+
+		/**
+		 * Register package build item.
+		 *
+		 * @since ??
+		 *
+		 * @param array $properties package build's properties.
+		 */
+		public static function register( $properties ) {}
+
+		/**
+		 * Get registered package build by name.
+		 *
+		 * @since ??
+		 *
+		 * @param string $name Package build name.
+		 *
+		 * @return array
+		 */
+		public static function get_package_build( $name ) {}
+
+		/**
+		 * Enqueue styles.
+		 *
+		 * @since ??
+		 */
+		public static function enqueue_styles() {}
+
+		/**
+		 * Enqueue scripts.
+		 *
+		 * @since ??
+		 */
+		public static function enqueue_scripts() {}
+		/**
+		 * Load specific stylesheets asynchronously by swapping the media attribute on load. This for stylesheets that not required to be loaded immediately.
+		 *
+		 * @since ??
+		 *
+		 * @param string $html HTML to replace.
+		 * @param string $handle Stylesheet handle.
+		 * @return string $html replacement html.
+		 */
+		public static function defer_styles( $html, $handle ) {}
+	}
+}
+
+
 namespace ET\Builder\Packages\Module\Options\Element {
 	class ElementClassnames {
 
