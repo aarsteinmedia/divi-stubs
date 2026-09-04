@@ -32968,4 +32968,10 @@ function AdvWidgetInit() {
 // end AdsenseWidget class
 function AdsenseWidgetInit() {
 }
+
+function et_core_is_fb_enabled() {
+}
+
+function et_builder_d5_enabled() {
+}
 }
