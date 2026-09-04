@@ -1,5 +1,6 @@
 {
     "name": "aarsteinmedia/divi-stubs",
+    "version": "0.1.1",
     "description": "DIVI function, class, and global variable declaration stubs for easier static analysis.",
     "homepage": "https://github.com/aarsteinmedia/divi-stubs",
     "keywords": [
@@ -7,7 +8,7 @@
         "static analysis"
     ],
     "require-dev": {
-        "php": ">=7.1",
+        "php": ">=7.4",
         "ext-gettext": "*",
         "giacocorsiglia/stubs-generator": "^0.5.0",
         "squizlabs/php_codesniffer": "*",
