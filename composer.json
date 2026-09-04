@@ -1,6 +1,6 @@
 {
     "name": "aarsteinmedia/divi-stubs",
-    "version": "4.28",
+    "version": "4.28.0",
     "description": "DIVI function, class, and global variable declaration stubs for easier static analysis.",
     "homepage": "https://github.com/aarsteinmedia/divi-stubs",
     "keywords": [
