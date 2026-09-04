@@ -5,6 +5,1688 @@
  * https://github.com/aarsteinmedia/divi-stubs
  */
 
+namespace ET\Builder\Framework\DependencyManagement\Interfaces {
+	/**
+	 * DependencyManagement: DependencyInterface
+	 *
+	 * @package Divi
+	 * @since ??
+	 */	
+	interface DependencyInterface {
+		/**
+		 * This function registers and initiates all the logic the class implements.
+		 *
+		 * @return void
+		 */
+		public function load();
+	}
+}
+
+namespace ET\Builder\Packages\Module\Options\Element {
+	class ElementClassnames {
+
+		/**
+		 * Get element classnames based on the provided arguments.
+		 *
+		 * This function is used to generate a string of class names based on the provided arguments.
+		 * It can be used to add class names to HTML elements dynamically.
+		 *
+		 * This function is equivalent of JS function:
+		 * {@link /api/js/divi-module/functions/ElementClassnames ElementClassnames} in
+		 * `@divi/module` package.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $args {
+		 *     Optional. An array of arguments to customize the class names.
+		 *
+		 *     @type array    $attrs              Optional. Additional attributes for the class names. Default `[]`.
+		 *     @type bool     $animation          Optional. Whether to include animation class names. Default `true`.
+		 *     @type bool     $background         Optional. Whether to include background class names. Default `true`.
+		 *     @type bool     $border             Optional. Whether to include border class names. Default `true`.
+		 *     @type bool     $link               Optional. Whether to include link class names. Default `true`.
+		 *     @type bool     $dividers           Optional. Whether to include divider class names. Default `false`.
+		 *     @type bool     $boxShadow          Optional. Whether to include box shadow class names. Default `false`.
+		 *     @type bool     $interactions       Optional. Whether to include interaction target class names. Default `true`.
+		 * }
+		 *
+		 * @return string The generated class names.
+		 *
+		 * @example:
+		 * ```php
+		 * // Example 1: Provide only the 'division' argument.
+		 * $args = [
+		 *     'dividers' => true,
+		 * ];
+		 *
+		 * $result = ElementClassnames::classnames( $args ); // Returns the class names related to dividers.
+		 * ```
+		 *
+		 * @example:
+		 * ```php
+		 * // Example 2: Provide multiple arguments.
+		 * $args = [
+		 *     'animation'  => true,
+		 *     'background' => true,
+		 *     'border'     => true,
+		 * ];
+		 * $result = ElementClassnames::classnames( $args ); // Returns the class names related to animation, background, and border.
+		 * ```
+		 *
+		 * @example:
+		 * ```php
+		 * // Example 3: Provide empty arguments.
+		 * $args = [];
+		 * $result = ElementClassnames::classnames( $args ); // Returns an empty string as no class names are included.
+		 * ```
+		 */
+		public static function classnames( array $args ) {}
+	}
+}
+
+namespace ET\Builder\Packages\ModuleLibrary {
+	class ModuleRegistration {
+
+		/**
+		 * All registered custom modules folders.
+		 *
+		 * @var array
+		 */
+		private static $_all_custom_modules_folders = array();
+
+		/**
+		 * All core modules metadata.
+		 *
+		 * @var array
+		 */
+		private static $_all_core_modules_metadata;
+
+		/**
+		 * All core modules conversion outline.
+		 *
+		 * @var array
+		 */
+		private static $_all_core_modules_conversion_outline;
+
+		/**
+		 * Module conversion outline cache.
+		 *
+		 * @var array
+		 */
+		private static $_module_conversion_outline_cache = array();
+
+		/**
+		 * All core modules default printed style attributes.
+		 *
+		 * @var array
+		 */
+		private static $_all_core_modules_default_printed_style_attributes;
+
+		/**
+		 * All core modules default render attributes.
+		 *
+		 * @var array
+		 */
+		private static $_all_core_modules_default_render_attributes;
+
+		/**
+		 * All core modules mapping module name to relative directory.
+		 *
+		 * @var array
+		 */
+		private static $_all_core_modules_mapping_module_name_to_relative_dir;
+
+		/**
+		 * Retrieves the core module name derived from the metadata folder path.
+		 *
+		 * This function processes the given metadata folder path to extract and
+		 * return the core module name in the appropriate format.
+		 *
+		 * Examples:
+		 * - Divi/includes/builder-5/visual-builder/packages/module-library/src/components/[module-name]/module.json
+		 * - Divi/includes/builder-5/visual-builder/packages/module-library/src/components/woocommerce/[module-name]/module.json
+		 *
+		 * @since ??
+		 *
+		 * @param string $metadata_folder The path to the metadata folder.
+		 *
+		 * @return string The core module name derived from the metadata folder.
+		 */
+		public static function get_core_module_name_from_metadata_folder( string $metadata_folder ) {}
+
+		/**
+		 * Process conversion outline.
+		 *
+		 * @since ??
+		 *
+		 * @param array  $metadata                The metadata of the module.
+		 * @param string $conversion_outline_file The path to the conversion outline file.
+		 *
+		 * @return bool True if the conversion outline is processed successfully, false otherwise.
+		 */
+		public static function process_conversion_outline( array $metadata, ?string $conversion_outline_file = null ) {}
+
+		/**
+		 * Registers a module with the given metadata folder and arguments.
+		 *
+		 * This method reads the metadata `module.json` file from the specified folder, decodes it,
+		 * and merges the metadata with the default arguments. It then registers the block type
+		 * using the merged arguments and returns the registered block type.
+		 *
+		 * @since          ??
+		 *
+		 * @param string $metadata_folder The path to the metadata folder.
+		 * @param array  $args             Optional. An array of arguments to merge with the default arguments.
+		 *                                 Default `[]`.
+		 *                                 Accepts any public property of `WP_Block_Type`. See
+		 *                                 `WP_Block_Type::__construct()` for more information on accepted arguments.
+		 *
+		 * @return WP_Block_Type|null The registered block type or `null` if the metadata file does not exist or cannot be
+		 *                            decoded.
+		 *
+		 * @throws \Exception If the metadata file cannot be read or decoded.
+		 * @example        :
+		 *                 ```php
+		 *                 ModuleRegistration::register_module(
+		 *                 '/path/to/metadata/folder',
+		 *                 [
+		 *                 'title' => 'Custom Title',
+		 *                 'attributes' => [
+		 *                 'attr1' => 'value1',
+		 *                 'attr2' => 'value2',
+		 *                 ],
+		 *                 ]
+		 *                 );
+		 *                 ```
+		 * @example        :
+		 *                 ```php
+		 *                 ModuleRegistration::register_module( '/path/to/metadata/folder' );
+		 *                 ```
+		 */
+		public static function register_module( string $metadata_folder, array $args = array() ) {}
+
+		/**
+		 * Registers a block type from the metadata stored in the `block.json` file.
+		 *
+		 * @param string $block_type    Block type name including namespace prefix.
+		 * @param string $metadata_file Path to the block metadata file.
+		 * @param array  $metadata      Block type metadata.
+		 * @return WP_Block_Type|false The registered block type on success, or false on failure.
+		 */
+		public static function register_block_type_from_metadata( $block_type, $metadata_file, $metadata = array() ) {}
+
+		/**
+		 * Retrieve the default attributes of a registered block module.
+		 *
+		 * This function retrieves the default attributes of a registered block module based on the provided module name.
+		 * It checks if the default attributes are already cached to optimize performance and returns the cached attributes if available.
+		 * It check if default attributes definition file exists in the module folder. If it exists, it retrieves the default attributes from the file.
+		 * If the default attributes are not cached, it retrieves the registered module using the `WP_Block_Type_Registry` class.
+		 * If the registered module is found, it retrieves the attributes of the module and extracts the default values into an array.
+		 *
+		 * @since ??
+		 *
+		 * @param string     $module_name The name of the module.
+		 * @param string     $default_property_name Optional. The name of the default property to use. It can be either `'default'` or `'defaultPrintedStyle'`. Default `'default'`.
+		 * @param array|null $metadata Optional. The metadata of the module. Default `null`.
+		 *
+		 * @return array An array of default attributes for the module.
+		 */
+		public static function get_default_attrs( string $module_name, string $default_property_name = 'default', $metadata = null ) {}
+
+		/**
+		 * Get fully resolved parent module attributes for use in a child module's render callback.
+		 *
+		 * `BlockParserStore::get_parent()` returns raw saved block attributes only — preset render
+		 * attributes are never written to the block store. This helper centralises the 3-layer merge
+		 * (defaults → presetRenderAttrs → rawAttrs) so that child module callbacks can retrieve a
+		 * parent's preset-resolved state without duplicating the merge logic or mutating the block.
+		 *
+		 * @since ??
+		 *
+		 * @param WP_Block_Parser_Block $parent_block The parent block object returned by BlockParserStore::get_parent().
+		 *
+		 * @return array Fully resolved parent attributes:
+		 *              defaults → preset render attrs → raw saved attrs (raw attrs win).
+		 */
+		public static function get_resolved_parent_attrs( $parent_block ) {}
+
+		/**
+		 * Get the default attributes for a module.
+		 *
+		 * This function returns the default attributes for the module with the provided module name and default property name.
+		 * The attributes are  defined and retrieved from the module's `module.json` file.
+		 *
+		 * @since ??
+		 *
+		 * @param string     $module_name           The name of the module to retrieve the default attributes for.
+		 * @param string     $default_property_name Optional. The name of the default property to use. It can be either `'default'` or `'defaultPrintedStyle'`. Default `'default'`.
+		 * @param array|null $metadata              Optional. The metadata of the module. Default `null`.
+		 *
+		 * @return array The default attributes for the module.
+		 *
+		 * @example:
+		 * ```php
+		 * // Retrieve the default attributes for a module called 'my_module'.
+		 * $default_attrs = ModuleRegistration::generate_default_attrs( 'my_module' );
+		 *
+		 * // Retrieve the default attributes for a module called 'another_module' using a custom default property called 'custom'.
+		 * $default_attrs = ModuleRegistration::generate_default_attrs( 'another_module', 'custom' );
+		 * ```
+		 */
+		public static function generate_default_attrs( string $module_name, string $default_property_name = 'default', $metadata = null ) {}
+
+		/**
+		 * Retrieve module selectors.
+		 *
+		 * Get the selectors associated with the attributes of a registered block that is defined in the module.json file.
+		 *
+		 * @since ??
+		 *
+		 * @param string $module_name The name of the module for which to retrieve the selectors.
+		 *
+		 * @return array An array of selectors where the key is the module attribute name and the value is the selector.
+		 *
+		 * @example:
+		 * ```php
+		 *     $selectors = ModuleRegistration::get_selectors( 'module_name' );
+		 *     // Returns an array of selectors for the specified module.
+		 *     // Example: ['attribute_name' => '.selector']
+		 * ```
+		 */
+		public static function get_selectors( string $module_name ) {}
+
+		/**
+		 * Check if a module is a child module.
+		 *
+		 * @since ??
+		 *
+		 * @param string $module_name The name of the module to check.
+		 *
+		 * @return bool True if the module is a child module, false otherwise.
+		 */
+		public static function is_child_module( $module_name ) {}
+
+		/**
+		 * Check if a module is nestable.
+		 *
+		 * @since ??
+		 *
+		 * @param string $module_name The name of the module to check.
+		 *
+		 * @return bool True if the module is nestable, false otherwise.
+		 */
+		public static function is_nestable( $module_name ) {}
+
+		/**
+		 * Retrieves the settings for a specified module.
+		 *
+		 * This function attempts to get the module settings from the registered block types.
+		 * If the module is not registered, it falls back to retrieving metadata from a PHP file
+		 * to improve performance for core modules.
+		 *
+		 * @since ??
+		 *
+		 * @param string $module_name The name of the module to retrieve settings for.
+		 * @return WP_Block_Type|null The module settings if found, or null if the module is not registered.
+		 */
+		public static function get_module_settings( $module_name ) {}
+
+		/**
+		 * Retrieves all module metadata from the generated metadata file.
+		 *
+		 * This method implements lazy loading for the module metadata array. On first call,
+		 * it loads the metadata from the automatically generated `_all_modules_metadata.php`
+		 * file and caches it in the static property. Subsequent calls return the cached data.
+		 *
+		 * The metadata file contains comprehensive information about all available Divi 5
+		 * modules including their names, titles, categories, icons, child modules, and
+		 * other configuration data required for module registration and rendering.
+		 *
+		 * @since ??
+		 *
+		 * @return array Associative array containing metadata for all available modules.
+		 *
+		 * @example
+		 * ```php
+		 * $metadata = ModuleRegistration::get_all_core_modules_metadata();
+		 * $accordion_data = $metadata['accordion'];
+		 * echo $accordion_data['title']; // Outputs: "Accordion"
+		 * ```
+		 */
+		public static function get_all_core_modules_metadata() {}
+
+		/**
+		 * Retrieves the core module metadata folder path for a specific module.
+		 *
+		 * The metadata folder path is constructed as:
+		 * ET_BUILDER_5_DIR/visual-builder/packages/module-library/src/components/{metadata_relative_dir}
+		 *
+		 * @since ??
+		 *
+		 * @param string $module_name The name of the module to get the metadata folder for.
+		 *
+		 * @return string|null The metadata folder path if found, null otherwise.
+		 */
+		public static function get_core_metadata_folder( string $module_name ) {}
+
+		/**
+		 * Retrieves the metadata folder path for a custom module.
+		 *
+		 * This method looks up the folder path for a custom (third-party) module from the
+		 * cached registry. Custom modules are registered during the module registration process
+		 * and their folder paths are stored in the static property.
+		 *
+		 * @since ??
+		 *
+		 * @param string $module_name The name of the custom module to get the metadata folder for.
+		 *
+		 * @return string|null The metadata folder path if found, null otherwise.
+		 */
+		public static function get_custom_metadata_folder( string $module_name ) {}
+
+		/**
+		 * Retrieves the metadata for a specific core module.
+		 *
+		 * This method implements lazy loading for individual module metadata. On first call,
+		 * it loads the complete metadata from the automatically generated `_all_modules_metadata.php`
+		 * file and caches it in the static property. Subsequent calls return the cached data.
+		 * The method maps the module name to its relative directory path and returns the
+		 * corresponding metadata array for that module.
+		 *
+		 * @since ??
+		 *
+		 * @param string $module_name The name of the module (e.g., 'divi/accordion', 'divi/button').
+		 *
+		 * @return array The metadata array for the specified module, or an empty array if the module
+		 *               is not found or the module name cannot be mapped to a relative directory.
+		 *
+		 * @example
+		 * ```php
+		 * // Get metadata for accordion module.
+		 * $metadata = ModuleRegistration::get_core_module_metadata( 'divi/accordion' );
+		 * if ( ! empty( $metadata ) ) {
+		 *     echo $metadata['title']; // Outputs: "Accordion"
+		 *     echo $metadata['description']; // Outputs module description
+		 * }
+		 *
+		 * // Get metadata for button module.
+		 * $button_metadata = ModuleRegistration::get_core_module_metadata( 'divi/button' );
+		 * ```
+		 */
+		public static function get_core_module_metadata( string $module_name ) {}
+
+		/**
+		 * Retrieves the module conversion outline for a specific Divi module.
+		 *
+		 * This method implements lazy loading and caching for module conversion outlines. On first call,
+		 * it loads the conversion outline data from either the core modules conversion outline file
+		 * or from an individual module conversion outline JSON file. Subsequent calls return the cached data.
+		 *
+		 * @since ??
+		 *
+		 * @param string      $module_name                  The name of the module to get conversion outline for.
+		 * @param string|null $conversion_outline_json_file Optional path to individual module conversion outline JSON file.
+		 *                                                  Used when the module is not found in core modules.
+		 *
+		 * @return array The module conversion outline array containing field mappings and transformation rules.
+		 *               Returns empty array if no conversion outline is found.
+		 */
+		public static function get_module_conversion_outline( string $module_name, ?string $conversion_outline_json_file = null ) {}
+
+		/**
+		 * Retrieves the default printed style attributes for a core module.
+		 *
+		 * This method implements lazy loading for the module default printed style attributes data. On first call,
+		 * it loads the attributes from the automatically generated `_all_modules_default_printed_style_attributes.php`
+		 * file and caches it in the static property. Subsequent calls return the cached data.
+		 *
+		 * Default printed style attributes define the CSS styles that are automatically applied to modules
+		 * when they are rendered on the frontend. These attributes ensure consistent styling across all
+		 * instances of a module type and provide the foundation for user customization.
+		 *
+		 * @since ??
+		 *
+		 * @param string $module_name The name of the module to retrieve the default printed style attributes for.
+		 *
+		 * @return array|null The default printed style attributes array for the specified module, or null if not found.
+		 *
+		 * @example
+		 * ```php
+		 * $style_attrs = ModuleRegistration::get_module_default_printed_style_attributes( 'divi/button' );
+		 * // Returns default CSS styles for button module
+		 * ```
+		 */
+		public static function get_module_default_printed_style_attributes( string $module_name ) {}
+
+		/**
+		 * Retrieves the default render attributes for a core module.
+		 *
+		 * This method implements lazy loading for the module default render attributes data. On first call,
+		 * it loads the attributes from the automatically generated `_all_modules_default_render_attributes.php`
+		 * file and caches it in the static property. Subsequent calls return the cached data.
+		 *
+		 * Default render attributes define the initial values and configuration for module attributes
+		 * when they are first rendered. These attributes serve as the baseline for module behavior
+		 * and can be overridden by user-defined values or preset configurations.
+		 *
+		 * @since ??
+		 *
+		 * @param string $module_name The name of the module to retrieve the default render attributes for.
+		 *
+		 * @return array|null The default render attributes array for the specified module, or null if not found.
+		 *
+		 * @example
+		 * ```php
+		 * $render_attrs = ModuleRegistration::_get_module_default_render_attributes( 'divi/text' );
+		 * // Returns default attribute values for text module rendering
+		 * ```
+		 */
+		private static function _get_module_default_render_attributes( string $module_name ) {}
+
+		/**
+		 * Maps a module name to its relative directory path.
+		 *
+		 * This private helper method creates a mapping between module names and their corresponding
+		 * relative directory paths within the module library structure. It implements lazy loading
+		 * by building the mapping cache on first call and reusing it for subsequent requests.
+		 *
+		 * The mapping is essential for locating module-specific files such as conversion outlines,
+		 * default attributes, and other module metadata that are stored in organized directory structures.
+		 *
+		 * @since ??
+		 *
+		 * @param string $module_name The name of the module to map to its relative directory.
+		 *
+		 * @return string The relative directory path for the specified module, or null if not found.
+		 */
+		private static function _get_core_module_relative_dir_from_module_name( string $module_name ) {}
+
+		/**
+		 * Determine if a module is disabled on all breakpoints.
+		 *
+		 * @since ??
+		 *
+		 * @param array $module_attrs Module attributes including decoration values.
+		 *
+		 * @return bool True when disabled on every breakpoint.
+		 */
+		private static function _is_disabled_on_all_breakpoints( array $module_attrs ) {}
+
+		/**
+		 * Determine if a disabled-on value is enabled for gating.
+		 *
+		 * @since ??
+		 *
+		 * @param mixed $value Disabled-on value for a breakpoint.
+		 *
+		 * @return bool True when value represents disabled state.
+		 */
+		private static function _is_disabled_toggle_on( $value ) {}
+
+		/**
+		 * Check whether the module is an interaction target.
+		 *
+		 * @since ??
+		 *
+		 * @param array $module_attrs Module attributes including decoration values.
+		 *
+		 * @return bool True when module is targeted by an interaction.
+		 */
+		private static function _is_interaction_target( array $module_attrs ) {}
+
+		/**
+		 * Determine if a module should be skipped during excerpt generation.
+		 *
+		 * @since ??
+		 *
+		 * @param string $module_name Module name.
+		 *
+		 * @return bool True when module should be excluded from automatic excerpt rendering.
+		 */
+		private static function _is_excerpt_excluded_module( string $module_name ) {}
+	}
+}
+
+namespace ET\Builder\Packages\Module {
+	class Module {
+
+	/**
+	 * Module renderer.
+	 *
+	 * This function is used to render a module in FE.
+	 *
+	 * This function is equivalent of JS function:
+	 * {@link /api/js/divi-module/functions/Module Module}
+	 * in `@divi/module` package.
+	 *
+	 * @since ??
+	 *
+	 * @param array $args {
+	 *     An array of arguments.
+	 *
+	 *     @type array    $attrs                     Optional. Module attributes data. Default `[]`.
+	 *     @type array    $htmlAttrs                 Optional. Custom HTML attributes. Default `null`.
+	 *     @type string   $id                        Optional. Module ID. Default empty string.
+	 *                                               In Visual Builder, the ID of module is a UUIDV4 string.
+	 *                                               In FrontEnd, it is module name + order index.
+	 *     @type string   $children                  Optional. The children element(s). Default empty string.
+	 *     @type string   $childrenIds               Optional. Module inner blocks. Default `[]`.
+	 *     @type bool     $hasModule                 Optional. Whether the module has module or not. Default `true`.
+	 *     @type string   $moduleCategory            Optional. Module category. Default empty string.
+	 *     @type string   $classname                 Optional. Custom CSS class attribute. Default empty string.
+	 *     @type bool     $isFirst                   Optional. Is first child flag. Default `false`.
+	 *     @type bool     $isLast                    Optional. Is last child flag. Default `false`.
+	 *     @type bool     $hasModuleClassName        Optional. Has module class name. Default `true`.
+	 *     @type callable $classnamesFunction        Optional. Function that will be invoked to generate module CSS class. Default `null`.
+	 *     @type array    $styles                    Optional. Custom inline style attribute. Default `[]`.
+	 *     @type string   $tag                       Optional. HTML tag. Default `div`.
+	 *     @type bool     $hasModuleWrapper          Optional. Has module wrapper flag. Default `false`.
+	 *     @type string   $wrapperTag                Optional. Wrapper HTML tag. Default `div`.
+	 *     @type array    $wrapperHtmlAttrs          Optional. Wrapper custom html attributes. Default `[]`.
+	 *     @type string   $wrapperClassname          Optional. Wrapper custom CSS class. Default empty string.
+	 *     @type callable $wrapperClassnamesFunction Optional. Function that will be invoked to generate module wrapper CSS class. Default `null`.
+	 *     @type callable $stylesComponent           Optional. Function that will be invoked to generate module styles. Default `null`.
+	 *     @type array    $parentAttrs               Optional. Parent module attributes data. Default `[]`.
+	 *     @type string   $parentId                  Optional. Parent Module ID. Default empty string.
+	 *                                               In Visual Builder, the ID of module is a UUIDV4 string.
+	 *                                               In FrontEnd, it is parent module name + parent order index.
+	 *     @type string   $parentName                Optional. Parent module name. Default empty string.
+	 *     @type string|null $stickyParentId            Optional. Sticky parent ID. Default `null`.
+	 *     @type bool     $isInsideStickyModule      Optional. Whether the module is inside a sticky module. Default `false`.
+	 *     @type string|null $stickyParentOrderClass    Optional. Sticky parent order class. Default `null`.
+	 *     @type array    $siblingAttrs              Optional. Module sibling attributes data. Default `[]`.
+	 *     @type array    $settings                  Optional. Custom settings. Default `[]`.
+	 *     @type int      $orderIndex                Optional. Module order index. Default `0`.
+	 *     @type int      $storeInstance             Optional. The ID of instance where this block stored in BlockParserStore class. Default `null`.
+	 * }
+	 *
+	 * @return string The module HTML.
+	 *
+	 * @example:
+	 * ```php
+	 *  ET_Builder_Module::render( array(
+	 *    'arg1' => 'value1',
+	 *    'arg2' => 'value2',
+	 *  ) );
+	 * ```
+	 *
+	 * @example:
+	 * ```php
+	 *  $module = new ET_Builder_Module();
+	 *  $module->render( array(
+	 *    'arg1' => 'value1',
+	 *    'arg2' => 'value2',
+	 *   ) );
+	 * ```
+	 */
+	public static function render( array $args ) {}
+
+	/**
+	 * Renders the styles preset for a module.
+	 *
+	 * @since ??
+	 *
+	 * @param array $args {
+	 *     Array of arguments.
+	 *
+	 *     @type string         $name                            The name of the module.
+	 *     @type array          $attrs                           The attributes of the module.
+	 *     @type array          $defaultPrintedStyleAttrs        The default printed style attributes.
+	 *     @type string         $parentId                        The ID of the parent module.
+	 *     @type string         $parentName                      The name of the parent module.
+	 *     @type string         $id                              The ID of the module.
+	 *     @type int            $storeInstance                   The store instance.
+	 *     @type ModuleElements $elements                        The elements of the module.
+	 *     @type Classnames     $classnamesInstance              The classnames instance.
+	 *     @type Classnames     $wrapperClassnamesInstance       The wrapper classnames instance.
+	 *     @type string         $selectorPrefix                  The selector prefix.
+	 *     @type bool           $hasModuleWrapper                Whether the module has a wrapper.
+	 *     @type bool           $isStyleEnqueuedAsStaticCss      Whether the style is enqueued as static CSS.
+	 *     @type callable       $stylesComponent                 The styles component.
+	 *     @type array          $settings                        The settings of the module.
+	 *     @type int            $orderIndex                      The order index of the module.
+	 *     @type string|null    $stickyParentId                  Optional. Sticky parent ID. Default `null`.
+	 *     @type bool           $isInsideStickyModule            Optional. Whether the module is inside a sticky module. Default `false`.
+	 *     @type string|null    $stickyParentOrderClass          Optional. Sticky parent order class. Default `null`.
+	 * }
+	 *
+	 * @return void
+	 */
+	public static function render_styles_preset_module( array $args ) {}
+
+	/**
+	 * Renders styles for a preset group.
+	 *
+	 * @since ??
+	 *
+	 * @param array $args {
+	 *     Array of arguments.
+	 *
+	 *     @type array          $attrs                           Attributes of the module.
+	 *     @type string         $parentId                        ID of the parent module.
+	 *     @type string         $parentName                      Name of the parent module.
+	 *     @type array          $parentAttrs                     Attributes of the parent module.
+	 *     @type array          $defaultPrintedStyleAttrs        Default printed style attributes.
+	 *     @type string         $name                            Name of the module.
+	 *     @type ModuleElements $elements                        Elements of the module.
+	 *     @type Classnames     $classnamesInstance              Instance of classnames.
+	 *     @type Classnames     $wrapperClassnamesInstance       Instance of wrapper classnames.
+	 *     @type string         $id                              ID of the module.
+	 *     @type int            $storeInstance                   Instance of the store.
+	 *     @type string         $selectorPrefix                  Prefix for the selector.
+	 *     @type bool           $hasModuleWrapper                Whether the module has a wrapper.
+	 *     @type bool           $isStyleEnqueuedAsStaticCss      Whether the style is enqueued as static CSS.
+	 *     @type callable       $stylesComponent                 Component for styles.
+	 *     @type array          $settings                        Settings for the module.
+	 *     @type array          $siblingAttrs                    Attributes of sibling modules.
+	 *     @type string|null    $stickyParentId                  Optional. Sticky parent ID. Default `null`.
+	 *     @type bool           $isInsideStickyModule            Optional. Whether the module is inside a sticky module. Default `false`.
+	 *     @type string|null    $stickyParentOrderClass          Optional. Sticky parent order class. Default `null`.
+	 *     @type int            $orderIndex                      Order index of the module.
+	 * }
+	 *
+	 * @return void
+	 */
+	public static function render_styles_preset_group( array $args ) {}
+
+	/**
+	 * Renders preset styles.
+	 *
+	 * @since ??
+	 *
+	 * @param array $args {
+	 *     Array of arguments.
+	 *
+	 *     @type string           $styleGroup                  The style group. Either 'preset' or 'presetGroup'.
+	 *     @type string           $name                        The name of the module.
+	 *     @type array            $defaultPrintedStyleAttrs    Default printed style attributes.
+	 *     @type ModuleElements   $elements                    Instance of ModuleElements.
+	 *     @type Classnames       $classnamesInstance          Instance of Classnames for the module.
+	 *     @type Classnames       $wrapperClassnamesInstance   Instance of Classnames for the module wrapper.
+	 *     @type string           $id                          The ID of the module.
+	 *     @type int              $storeInstance               Instance of the store.
+	 *     @type string           $selectorPrefix              The selector prefix.
+	 *     @type bool             $hasModuleWrapper            Whether the module has a wrapper.
+	 *     @type bool             $isStyleEnqueuedAsStaticCss  Whether the style is enqueued as static CSS.
+	 *     @type bool             $isSelectorProcessed         Whether the selector has been processed.
+	 *     @type callable         $stylesComponent             The styles component callback.
+	 *     @type array            $settings                    The settings array.
+	 *     @type int              $orderIndex                  The order index.
+	 *     @type GlobalPresetItem $presetItem                  Instance of GlobalPresetItem for the current preset.
+	 *     @type GlobalPresetItem $parentPresetItem            Instance of GlobalPresetItem for the parent preset.
+	 *     @type GlobalPresetItem $siblingPreviousPresetItem   Instance of GlobalPresetItem for the previous sibling preset.
+	 *     @type GlobalPresetItem $siblingNextPresetItem       Instance of GlobalPresetItem for the next sibling preset.
+	 *     @type string           $stickyParentId              Optional. Sticky parent ID. Default empty string.
+	 *     @type bool             $isInsideStickyModule        Optional. Whether the module is inside a sticky module. Default `false`.
+	 *     @type string           $stickyParentOrderClass      Optional. Sticky parent order class. Default empty string.
+	 * }
+	 *
+	 * @return void
+	 */
+	public static function render_styles_preset( array $args ) {}
+}
+
+}
+
+namespace ET\Builder\FrontEnd\Module {
+	class Style {
+
+	/**
+	 * Media queries key value pairs. {@see get_media_quries()}
+	 *
+	 * @since ??
+	 *
+	 * @var array
+	 */
+	private static $_media_queries = [];
+
+	/**
+	 * Styles data holder.
+	 *
+	 * This static property is used to store an array of styles for
+	 * different parts of the Divi. Each style is represented
+	 * by an associative array, using a style key determined by {@see self::get_style_key()} and
+	 * the 'group' parameter in the {@see self::add()} function.
+	 * The styles are structured by a group(string), key(int/string), and other details for each style item.
+	 *
+	 * Each style item is an array including:
+	 * - The media query under which this style item falls or 'general' if it's not specific to any.
+	 * - The CSS selector to which these styles apply.
+	 * - The CSS declarations which are the styles to be applied.
+	 * - The priority of the style, which indicates its order of application.
+	 * - An optional 'critical' key indicating if the style is critical (above the fold).
+	 *
+	 * The $_styles property holds the styles until they are rendered using {@see self::render()}.
+	 *
+	 * Please note, modifying $_styles directly could lead to inconsistent behavior
+	 * and it is recommended to use the provided 'add()' method instead.
+	 *
+	 * @since ??
+	 *
+	 * @var array An array of styles, each represented by an associative array with keys for the 'name' and 'value'
+	 *      properties.
+	 */
+	private static $_styles = [];
+
+	/**
+	 * Holds an array of already processed preset style selector.
+	 *
+	 * This static property is utilized in the context of preset style processing.
+	 *
+	 * It basically acts as a cache mechanism so that once a preset selector has been successfully processed,
+	 * the system would not re-process it every time, so that the same processing logic is not repetitively performed.
+	 *
+	 * @since ??
+	 *
+	 * @var array
+	 */
+	private static $_preset_selector_processed = [];
+
+	/**
+	 * Cache for ancestor IDs to avoid repeated parent chain walks.
+	 *
+	 * @since ??
+	 *
+	 * @var array<string, array>
+	 */
+	private static $_ancestor_ids_cache = [];
+
+	/**
+	 * Cache for style key to avoid repeated function calls.
+	 * The style key remains constant only within a single render context.
+	 *
+	 * @since ??
+	 *
+	 * @var int|string|null
+	 */
+	private static $_style_key_cache = null;
+
+	/**
+	 * Signature of the render context used for style key cache.
+	 *
+	 * @since ??
+	 *
+	 * @var string|null
+	 */
+	private static $_style_key_cache_context = null;
+
+	/**
+	 * Build style key cache context signature.
+	 *
+	 * @since ??
+	 *
+	 * @return string
+	 */
+	private static function _get_style_key_cache_context_signature() {}
+
+	/**
+	 * Counter for generating unique keys without calling uniqid().
+	 * Used during style rendering to avoid expensive uniqid() calls in hot loops.
+	 *
+	 * @since ??
+	 *
+	 * @var int
+	 */
+	private static $_unique_counter = 0;
+
+	/**
+	 * Normalize transition declarations in a CSS declaration string.
+	 *
+	 * - Merge duplicate `transition-property` declarations by unioning properties.
+	 * - Collapse duplicate transition longhands (`transition-duration`,
+	 *   `transition-timing-function`, `transition-delay`) to a single declaration,
+	 *   preserving the last-defined value (CSS cascade behavior).
+	 *
+	 * @since ??
+	 *
+	 * @param string $declaration CSS declaration string.
+	 *
+	 * @return string
+	 */
+	private static function _normalize_transition_declarations( string $declaration ) {}
+
+	/**
+	 * Detected module types for inner content rendering.
+	 *
+	 * Stores module types detected in blog post content before rendering.
+	 * Used to ensure default preset styles are generated for all detected module types,
+	 * even if individual module instances use explicit presets.
+	 *
+	 * @since ??
+	 *
+	 * @var array
+	 */
+	private static $_detected_module_types_for_inner_content = [];
+
+	/**
+	 * Flag indicating if inner content is being rendered in Theme Builder context.
+	 *
+	 * @since ??
+	 *
+	 * @var bool
+	 */
+	private static $_is_theme_builder_context_for_inner_content = false;
+
+	/**
+	 * Check if a preset selector has been processed.
+	 *
+	 * @since ??
+	 *
+	 * @param string $preset_selector_classname The classname of the preset selector to check.
+	 *
+	 * @return bool True if the preset selector has already been processed, false otherwise.
+	 */
+	public static function is_preset_selector_processed( string $preset_selector_classname ) {}
+
+	/**
+	 * Retrieve Post ID from 1 of 3 sources depending on which exists:
+	 * - get_the_ID()
+	 * - $_GET['post']
+	 * - $_POST['et_post_id']
+	 *
+	 * @since ??
+	 *
+	 * @return int|bool
+	 */
+	public static function get_current_post_id_reverse() {}
+
+	/**
+	 * Get the current TB layout ID if we are rendering one or the current post ID instead.
+	 *
+	 * @since ??
+	 *
+	 * @return integer
+	 */
+	public static function get_layout_id() {}
+
+	/**
+	 * Get style key.
+	 *
+	 * @return int|string
+	 */
+	public static function get_style_key() {}
+
+	/**
+	 * Return style array from {@see self::$internal_modules_styles} or {@see self::$styles}.
+	 *
+	 * @param string     $group Style Group.
+	 * @param int|string $key   Style Key.
+	 *
+	 * @return array
+	 */
+	public static function get_style_array( string $group = 'module', $key = 0 ) {}
+
+	/**
+	 * Return media query from the media query name.
+	 * E.g For max_width_767 media query name, this function return "@media only screen and ( max-width: 767px )".
+	 *
+	 * @since ??
+	 *
+	 * @param string $name Media query name e.g max_width_767, max_width_980.
+	 *
+	 * @return bool|mixed
+	 */
+	public static function get_media_query( string $name ) {}
+
+	/**
+	 * Return media query key value pairs.
+	 *
+	 * @since ??
+	 *
+	 * @param bool $for_js Whether media queries is for js ETBuilderBackend.et_builder_css_media_queries variable.
+	 *
+	 * @return array|mixed|void
+	 */
+	public static function get_media_quries( bool $for_js = false ) {}
+
+	/**
+	 * Set media queries key value pairs.
+	 *
+	 * @since ??
+	 */
+	public static function set_media_queries() {}
+
+	/**
+	 * Add a new style.
+	 *
+	 * Adds a new style to the CSS styles data. The style will be enqueued by `self::enqueue()`.
+	 *
+	 * @since ??
+	 *
+	 * @param array $args {
+	 *     An array of arguments for adding a style.
+	 *
+	 *     @type string    $id              The ID of the style.
+	 *     @type int       $orderIndex      The order index of the style.
+	 *     @type array     $styles          Optional. An array of CSS styles for the style. Default `[]`.
+	 *     @type object    $storeInstance   Optional. The instance of the store. Default `null`.
+	 *     @type int       $priority        Optional. The priority of the style. Default `10`.
+	 *     @type string    $group           Optional. The group of the style. Default `module`.
+	 * }
+	 *
+	 * @return void
+	 *
+	 * @example
+	 * ```php
+	 * self::add( [
+	 *     'id'          => 'style-1',
+	 *     'styles'      => ['color' => '#000', 'font-size' => '16px'],
+	 *     'storeInstance' => $store,
+	 *     'orderIndex'  => 1,
+	 *     'priority'    => 20,
+	 * ] );
+	 * ```
+	 */
+	/**
+	 * Merge free-form CSS (empty selector) declaration strings.
+	 *
+	 * Appends with a space separator (no `;` between full rules), matching {@see self::add()}.
+	 *
+	 * @param string $existing            Prior declaration text.
+	 * @param string $declaration         Incoming declaration text.
+	 * @param bool   $append_when_identical When true, always append with a space (legacy {@see self::add()} behavior).
+	 *                                      When false, return `$existing` unchanged if both strings are identical.
+	 *
+	 * @return string Combined declaration string.
+	 */
+	private static function _merge_free_form_declaration_strings( string $existing, string $declaration, bool $append_when_identical ) {}
+
+	/**
+	 * Merge two declaration strings for the same selector (non-empty), matching {@see self::add()}.
+	 *
+	 * @param string $existing_declaration Prior declaration.
+	 * @param string $declaration         Incoming declaration (must differ from existing when caller requires an update).
+	 *
+	 * @return string Combined declarations with correct `;` separation.
+	 */
+	private static function _merge_keyed_selector_declaration_strings( string $existing_declaration, string $declaration ) {}
+
+	/**
+	 * Add style declarations to the internal style store.
+	 *
+	 * @param array $args Style payload and metadata.
+	 *
+	 * @return void
+	 */
+	public static function add( array $args ) {}
+
+	/**
+	 * Merge module style data from multiple Theme Builder layout passes into one structure.
+	 *
+	 * Module order classes (e.g. `.et_pb_blurb_0`) reset per layout, so identical rules can be
+	 * collected under separate style keys. Outputting each layout's module styles separately then
+	 * duplicates identical selector/declaration pairs in unified CSS. This merge drops exact
+	 * duplicates while preserving cascade order and concatenating conflicting declarations on the
+	 * same selector like {@see self::add()}.
+	 *
+	 * @since ??
+	 *
+	 * @param array $into Existing styles data keyed by media query then selector.
+	 * @param array $from Styles data to merge in (same shape as {@see self::get_style_array()}).
+	 *
+	 * @return array Merged styles data.
+	 */
+	public static function merge_module_styles_data( array $into, array $from ) {}
+
+	/**
+	 * Sort an array of items by their priority.
+	 *
+	 * This function takes an array of items. The function then sorts the array of priorities in ascending
+	 * order. If two items have the same priority, they will be sorted by their original index
+	 * within the input array.
+	 *
+	 * @since ??
+	 *
+	 * @param array $collection The array to be sorted. Each child item in the array should have a 'priority' key.
+	 *
+	 * @return array An array of items sorted by priority. The array will maintain the same keys as the input array.
+	 *
+	 * @example
+	 * ```php
+	 * $collection = [
+	 *     'selector1' => ['priority' => 5, 'item' => 'A'],
+	 *     'selector2' => ['priority' => 10, 'item' => 'B'],
+	 *     'selector3' => ['priority' => 5, 'item' => 'C'],
+	 * ];
+	 *
+	 * $sortedCollection = sort_by_priority($collection);
+	 *
+	 * // $sortedCollection will be:
+	 * // [
+	 * //     'selector1' => ['priority' => 5, 'item' => 'A'],
+	 * //     'selector3' => ['priority' => 5, 'item' => 'C'],
+	 * //     'selector2' => ['priority' => 10, 'item' => 'B'],
+	 * // ]
+	 * ```
+	 */
+	public static function sort_by_priority( array &$collection ) {}
+
+	/**
+	 * Enqueue styles from the Style class.
+	 *
+	 * This function retrieves the styles data from the Style class and enqueues the styles on the
+	 * page. It concatenates the styles into a single string and echoes them within `style` tags.
+	 * The styles are sanitized and escaped before being output to the page.
+	 *
+	 * @since ??
+	 *
+	 * @param string $style_type The type of styles to enqueue.
+	 * @param string $group The group of styles to enqueue. Default is 'module'.
+	 * @param string $key   Optional. The element id.
+	 *
+	 * @return void
+	 *
+	 * @example: Enqueue styles
+	 * ```php
+	 * MyStyles::enqueue();
+	 * ```
+	 */
+	public static function enqueue( string $style_type = 'default', string $group = 'module', $key = 0 ) {}
+
+	/**
+	 * Render sorted styles as string.
+	 *
+	 * @since ??
+	 *
+	 * @param string $style_type The type of styles to enqueue.
+	 * @param string $group The group of styles to enqueue. Default is 'module'.
+	 * @param string $key        Optional. The element id.
+	 *
+	 * @example: Render styles
+	 * ```php
+	 * MyStyles::render();
+	 * ```
+	 */
+	public static function render( string $style_type = 'default', string $group = 'module', $key = 0 ) {}
+
+	/**
+	 * Render styles data as CSS string.
+	 *
+	 * Processes an array of styles data, sorts them by media queries and priority,
+	 * merges styles with identical declarations, and filters by style type (default or critical).
+	 * Returns the rendered CSS as a string with proper media query wrapping.
+	 *
+	 * @since ??
+	 *
+	 * @param array  $styles_data Array of styles data organized by media queries.
+	 *                            Each style item contains selector, declaration, priority, and optional critical flag.
+	 * @param string $style_type  The type of styles to render. Default is 'default'.
+	 *                            Use 'critical' to render only critical styles.
+	 *
+	 * @return string The rendered CSS string, or empty string if no styles data provided.
+	 */
+	public static function render_by_styles_data( array $styles_data, string $style_type = 'default' ) {}
+
+	/**
+	 * Reset styles data.
+	 *
+	 * Resets the styles data to an empty array `[]`.
+	 *
+	 * @since ??
+	 *
+	 * @return void
+	 */
+	public static function reset() {}
+
+	/**
+	 * Clear styles for a specific key.
+	 *
+	 * Clears all collected styles for a given key. This is useful when rendering
+	 * multiple independent content blocks (like blog posts) in a single request,
+	 * where styles should not accumulate across blocks.
+	 *
+	 * @since ??
+	 *
+	 * @param int|string $key The style key to clear. Default 0 (uses current style key).
+	 *
+	 * @return void
+	 */
+	public static function clear_styles_for_key( $key = 0 ) {}
+
+	/**
+	 * Set detected module types for inner content rendering.
+	 *
+	 * Stores module types detected in blog post content before rendering.
+	 * Used to ensure default preset styles are generated for all detected module types.
+	 *
+	 * @since ??
+	 *
+	 * @param array $module_types Array of module type names (e.g., ['divi/text', 'divi/button']).
+	 *
+	 * @return void
+	 */
+	public static function set_detected_module_types_for_inner_content( array $module_types ) {}
+
+	/**
+	 * Get detected module types for inner content rendering.
+	 *
+	 * @since ??
+	 *
+	 * @return array Array of module type names.
+	 */
+	public static function get_detected_module_types_for_inner_content() {}
+
+	/**
+	 * Set Theme Builder context flag for inner content rendering.
+	 *
+	 * Stores whether inner content is being rendered in Theme Builder context.
+	 * Used to determine if the `.et-db #et-boc .et-l` selector prefix should be applied.
+	 *
+	 * @since ??
+	 *
+	 * @param bool $is_theme_builder Whether rendering in Theme Builder context.
+	 *
+	 * @return void
+	 */
+	public static function set_is_theme_builder_context_for_inner_content( bool $is_theme_builder ) {}
+
+	/**
+	 * Get Theme Builder context flag for inner content rendering.
+	 *
+	 * @since ??
+	 *
+	 * @return bool Whether rendering in Theme Builder context.
+	 */
+	public static function get_is_theme_builder_context_for_inner_content() {}
+
+	/**
+	 * Provides styles for global colors.
+	 *
+	 * This function retrieves and prepares style data from global colors data. The values are then
+	 * sanitized and escaped for secure use.
+	 *
+	 * It can be used in two ways:
+	 * 1. Without any parameters - In this case, it returns styles for all available global colors.
+	 * 2. With an array of $global_color_ids - It only returns styles for the colors associated with the provided ids.
+	 *
+	 * @since ??
+	 *
+	 * @param array $global_color_ids An optional parameter. When provided, the function will only include
+	 *                                the styles for the global colors associated with these ids.
+	 *                                If not provided or an empty array is passed, styles for all global colors
+	 *                                will be included.
+	 *
+	 * @return string Returns a string containing the styles for the global colors.
+	 */
+	public static function get_global_colors_style( array $global_color_ids = [] ) {}
+
+	/**
+	 * The group of the style where it will be added.
+	 *
+	 * @since ??
+	 *
+	 * @var string
+	 */
+	private static $_group_style = 'module';
+
+	/**
+	 * Set the group of the style where it will be added.
+	 *
+	 * @since ??
+	 *
+	 * @param string $group The group of the style.
+	 *
+	 * @return void
+	 */
+	public static function set_group_style( string $group ) {}
+
+	/**
+	 * Get the group of the style where it will be added.
+	 *
+	 * @since ??
+	 *
+	 * @return string
+	 */
+	public static function get_group_style() {}
+
+	/**
+	 * Get global variable groups as CSS styles.
+	 *
+	 * This function retrieves active numeric, font, image, and gradient global variables from global data and formats
+	 * them into CSS custom property declarations for `:root`.
+	 *
+	 * Image values are normalized to CSS image values and wrapped with `url(...)` only when they are not
+	 * already wrapped.
+	 *
+	 * @since ??
+	 *
+	 * @param array $global_variable_ids Optional list of global variable IDs to include.
+	 *                                   If omitted, all active numeric, font, image, and gradient variables are included.
+	 *
+	 * @return string The generated `:root{...}` CSS style block containing numeric, font, image, and gradient variables.
+	 */
+	public static function get_global_numeric_and_fonts_vars_style( array $global_variable_ids = [] ) {}
+}
+
+}
+
+namespace ET\Builder\Framework\Utility {
+class HTMLUtility {
+
+	/**
+	 * A simple utility for conditionally joining classNames together.
+	 *
+	 * This function is equivalent of JS function `classnames` by JedWatson.
+	 * With a slight difference that this function will account a class considered as valid
+	 * when it contains at least single lowercase letter character ([a-z]).
+	 * This is intended to make this function more predictable.
+	 *
+	 * @link https://github.com/JedWatson/classnames
+	 *
+	 * @since ??
+	 *
+	 * @param string|string[] ...$args The class names to be merged.
+	 *
+	 * @return string Unique and trimmed class names, or empty if no class names found.
+	 */
+	public static function classnames( ...$args ) {}
+
+	/**
+	 * Get all HTML element attributes.
+	 *
+	 * This function merges the values of `HTMLUtility::get_event_handler_attributes()`,
+	 * `HTMLUtility::get_fixed_name_attributes()` and `HTMLUtility::get_wildcard_name_attributes()`.
+	 *
+	 * @link https://html.spec.whatwg.org/multipage/indices.html#attributes-1
+	 *
+	 * @since ??
+	 *
+	 * @return array {
+	 *   A key-value pair array with the attribute name as the key and the attribute details as the value.
+	 *
+	 *   @type array $attribute {
+	 *     Attribute details.
+	 *
+	 *     @type array    $elements         List of elements where the attribute can be used. Will be empty
+	 *                                      when the is global attribute and can be used to any elements.
+	 *     @type bool     $booleanAttribute Optional. Boolean attribute flag. Default `false`.
+	 *     @type callable $sanitizer        Optional. Function that will be used to sanitize the attribute value.
+	 *                                      Only applicable for key-value pair attributes. Default `esc_attr` or `esc_js`.
+	 *     }
+	 * }
+	 **/
+	public static function get_all_attributes() {}
+
+	/**
+	 * Get HTML element attribute details.
+	 *
+	 * @since ??
+	 *
+	 * @param string $attribute The attribute name.
+	 *
+	 * @return array {
+	 *        Attribute details. Will return empty array on failure.
+	 *
+	 *        @type array    $elements         List of elements where the attribute can be used. Will be empty
+	 *                                         when the is global attribute and can be used to any elements.
+	 *        @type bool     $booleanAttribute Optional. Boolean attribute flag. Attribute can be used to any elements. Default `false`.
+	 *        @type callable $sanitizer        Optional. Function that will be used to sanitize the attribute value. Default `esc_attr`.
+	 * }
+	 **/
+	public static function get_attribute_details( $attribute ) {}
+
+	/**
+	 * Get HTML element event handler attributes.
+	 *
+	 * @link https://html.spec.whatwg.org/multipage/indices.html#attributes-1
+	 *
+	 * @since ??
+	 *
+	 * @return array {
+	 *   A key-value pair array with the attribute name as the key and the attribute details as the value.
+	 *
+	 *   @type array $attribute {
+	 *     Attribute details.
+	 *
+	 *     @type array    $elements         List of HTML elements where the attribute can be used. Will be empty
+	 *                                      when the is global attribute and can be used to any elements.
+	 *     @type bool     $booleanAttribute Optional. Boolean attribute flag. Default `false`.
+	 *     @type callable $sanitizer        Optional. Function that will be used to sanitize the attribute value.
+	 *                                      Only applicable for key-value pair attributes. Default `esc_js`.
+	 *    }
+	 * }
+	 **/
+	public static function get_event_handler_attributes() {}
+
+	/**
+	 * Get fixed name attributes.
+	 *
+	 * @link https://html.spec.whatwg.org/multipage/indices.html#attributes-1
+	 *
+	 * @since ??
+	 *
+	 * @return array {
+	 *   A key-value pair array with the attribute name as the key and the attribute details as the value.
+	 *
+	 *   @type array $attribute {
+	 *     Attribute details.
+	 *
+	 *     @type array    $elements         List of HTML elements where the attribute can be used. Will be empty
+	 *                                      when the is global attribute and can be used to any elements.
+	 *     @type bool     $booleanAttribute Optional. Boolean attribute flag. Default `false`.
+	 *     @type callable $sanitizer        Optional. Function that will be used to sanitize the attribute value.
+	 *                                      Only applicable for key-value pair attributes. Default `esc_attr`.
+	 *    }
+	 * }
+	 **/
+	public static function get_fixed_name_attributes() {}
+
+	/**
+	 * Get Wildcard name attributes.
+	 *
+	 * @link https://html.spec.whatwg.org/multipage/indices.html#attributes-1
+	 *
+	 * @since ??
+	 *
+	 * @return array {
+	 *   A key-value pair array with the attribute name as the key and the attribute details as the value.
+	 *
+	 *   @type array $attribute {
+	 *     Attribute details.
+	 *
+	 *     @type array    $elements         List of HTML elements where the attribute can be used. Will be empty
+	 *                                          when the is global attribute and can be used to any elements.
+	 *     @type bool     $booleanAttribute Optional. Boolean attribute flag. Default `false`.
+	 *     @type callable $sanitizer        Optional. Function that will be used to sanitize the attribute value.
+	 *                                      Only applicable for key-value pair attributes. Default `esc_attr`.
+	 *     }
+	 * }
+	 **/
+	public static function get_wildcard_name_attributes() {}
+
+	/**
+	 * Check whether an HTML attribute is valid or not.
+	 *
+	 * @since ??
+	 *
+	 * @param string $attribute The attribute name.
+	 * @param string $tag       The HTML element tag where the attributes will be used.
+	 *
+	 * @return array|false The attribute details on success or `false` on failure.
+	 **/
+	public static function is_valid_attribute( $attribute, $tag ) {}
+
+	/**
+	 * Escape attribute name for safe HTML output.
+	 *
+	 * @since ??
+	 *
+	 * @param string $name The attribute name to escape.
+	 *
+	 * @return string Escaped attribute name.
+	 */
+	private static function _escape_attribute_name( $name ) {}
+
+	/**
+	 * Render HTML attributes.
+	 *
+	 * @since ??
+	 *
+	 * @param array  $attributes A key-value pair array of attributes data.
+	 *                           The array item key must be a string.
+	 *                           For boolean attributes, the array item value must be `true`.
+	 *                           For key-value pair attributes, the array item value must be an `int`, `float`, `string`, `boolean`, `array` or `null`.
+	 *                             `boolean`  value will be stringified to avoid `true` getting printed as `1` and `false` getting printed as `0`.
+	 *                             `array` value is only applicable for `style` attribute.
+	 *                             `null` value will result in the attribute not being rendered.
+	 * @param string $tag        The HTML element tag where the attributes will be used.
+	 * @param array  $sanitizers Optional. A key-value pair array of custom sanitizers that will be used to override the default sanitizer.
+	 *                           The array key is the attribute name and the array value is the callable function.
+	 *                           Only applicable for key-value pair attributes. Default `[]`.
+	 *
+	 * @return string
+	 **/
+	public static function render_attributes( $attributes, $tag, $sanitizers = [] ) {}
+
+	/**
+	 * Render element styles.
+	 *
+	 * @since ??
+	 *
+	 * @param array    $styles    A key-value pair array of styles data.
+	 *                            The array key is the style property name.
+	 *                            The array value is the style property value which must be a `string` or `null`.
+	 *                            Note: `null` result in the style property being skipped.
+	 * @param callable $sanitizer Optional. A callable function that will be used to override the default sanitizer. Default `null`.
+	 *
+	 * @return string
+	 **/
+	public static function render_styles( $styles, $sanitizer = null ) {}
+
+	// phpcs:ignore ET.Comments.Todo.TodoFound -- Legacy TODO: May not be tracked in GitHub issues yet. Preserve for future tracking/removal.
+	// TODO feat(D5, Frontend Rendering) Need improvement to be able to render `svg` element properly.
+	/**
+	 * Render HTML element.
+	 *
+	 * @since ??
+	 *
+	 * @param array $props {
+	 *     An array of arguments.
+	 *
+	 *     @type string       $tag                   HTML Element tag.
+	 *     @type bool         $tagEscaped            Optional. Whether the tag name has been escaped or not. Default `false`.
+	 *     @type array        $attributesSanitizers  Optional. A key-value pair array of custom sanitizers that will be used to override the default sanitizer.
+	 *                                               The array key is the attribute name and the array value is the callable function.
+	 *                                               Only applicable for key-value pair attributes.
+	 *                                               Default `[]`.
+	 *     @type array        $attributes            Optional. A key-value pair array of attributes data.
+	 *                                               The array item key must be a string.
+	 *                                               For boolean attributes, the array item value must be `true`.
+	 *                                               For key-value pair attributes, the array item value must be a `int`, `float`, `string`, `boolean`, `array` or `null`.
+	 *                                                 `boolean`  value will be stringified to avoid `true` getting printed as `1` and `false` getting printed as `0`.
+	 *                                                 `array` value only applicable for `style` attribute.
+	 *                                                 `null` value will skip the attribute to be rendered.
+	 *     @type callable     $childrenSanitizer    Optional. The function that will be invoked to sanitize/escape the children element. Default `esc_html`.
+	 *     @type string|array $children             Optional. The children element. Default `null`.
+	 *                                              Pass string for single children element.
+	 *                                              Pass array for multiple children elements and nested children elements.
+	 *                                              Only applicable for non self-closing tags.
+	 * }
+	 *
+	 * @return string
+	 **/
+	public static function render( $props ) {}
+
+	/**
+	 * List of HTML Self-Closing Tags
+	 *
+	 * @since ??
+	 *
+	 * @var array
+	 */
+	private static $_self_closing_tags = [];
+
+	/**
+	 * Check whether an HTML tag is self-closing or not.
+	 *
+	 * @since ??
+	 *
+	 * @param string $tag The HTML element tag to be checked.
+	 *
+	 * @return bool `true` if the tag is self-closing, `false` otherwise.
+	 **/
+	public static function is_self_closing_tag( string $tag ) {}
+
+	/**
+	 * List of HTML Self-Closing Tags mapped to their required attributes.
+	 *
+	 * @since ??
+	 *
+	 * @var array
+	 */
+	private static $_self_closing_tag_required_attrs_mapping = [];
+
+	/**
+	 * Get list of attributes required for certain self-closing HTML tags.
+	 *
+	 * These tags include track, source, param, meta, link, input, img, embed, col, area, and base.
+	 *
+	 * @since ??
+	 *
+	 * @param string $tag        The self-closing HTML tag to be checked.
+	 * @param string $parent_tag Optional. The parent HTML element tag where this element will be rendered.
+	 *                           It is used for certain self-closing tags that need to know the parent tag in order to retrieve
+	 *                           the required attributes list, such as the source tag. Default empty string.
+	 *
+	 * @return array {
+	 *   A key-value pair array with the attribute name as the key and the attribute details as the value.
+	 *   Will return an empty array on failure.
+	 *
+	 *   @type array $attributes  List of required attributes.
+	 *   @type bool  $requiredAll Whether all attributes are required or not.
+	 * }
+	 **/
+	public static function get_self_closing_tag_required_attrs( string $tag, string $parent_tag = '' ) {}
+
+	/**
+	 * Convert line breaks.
+	 *
+	 * It converts line breaks to `<br>` or `\n`.
+	 *
+	 * @since ??
+	 *
+	 * @param string $content            Content.
+	 * @param string $line_breaks_format Line break format e.g `<br>` or `\n`.
+	 *
+	 * @return string Processed content.
+	 */
+	public static function convert_line_breaks( string $content, string $line_breaks_format = "\n" ) {}
+
+	/**
+	 * Replace selected entities in content.
+	 *
+	 * The do_shortcode() replaces square brackers with HTML entities. We need to convert
+	 * them back to make sure JS code works properly.
+	 *
+	 * @since ??
+	 *
+	 * @param string $content Content.
+	 *
+	 * @return string Processed content.
+	 */
+	public static function replace_code_content_entities( $content ) {}
+
+	/**
+	 * Convert smart quotes and &amp; entity to their applicable characters.
+	 *
+	 * This function is the replacement of Divi 4 function `ET_Builder_Element::convert_smart_quotes_and_amp`.
+	 *
+	 * @since ??
+	 *
+	 * @param string $text Input text.
+	 *
+	 * @return string
+	 */
+	public static function convert_smart_quotes_and_amp( $text ) {}
+
+	/**
+	 * Decode WordPress block comment entities safely.
+	 *
+	 * WordPress stores block comments with encoded quotes and other entities.
+	 * This function decodes ONLY the entities that WordPress uses in block structure,
+	 * specifically avoiding dangerous entities like angle brackets that could enable XSS.
+	 *
+	 * Safe entities (required for parse_blocks()):
+	 * - &quot; → " (JSON quotes in block attributes)
+	 * - &#039; / &#39; → ' (single quotes)
+	 * - &amp; → & (ampersands in URLs, etc.)
+	 * - &#091; → [ (brackets for shortcodes)
+	 * - &#093; → ] (brackets for shortcodes)
+	 *
+	 * Unsafe entities (NOT decoded - prevents XSS):
+	 * - &lt; and &#60; remain encoded (no < tags)
+	 * - &gt; and &#62; remain encoded (no > tags)
+	 * - &lt;script&gt; cannot become `<script>`
+	 *
+	 * @since ??
+	 *
+	 * @param string $content Content with encoded entities.
+	 * @return string Content with safe entities decoded.
+	 */
+	public static function decode_wordpress_block_entities( string $content ) {}
+
+	/**
+	 * Check if a string contains HTML tags.
+	 *
+	 * @since ??
+	 *
+	 * @param string $string The string to be checked.
+	 *
+	 * @return bool `true` if the string contains HTML tags, `false` otherwise.
+	 **/
+	public static function contains_html_tags( string $string ) {}
+
+	/**
+	 * Determines the target attribute for a link based on the provided link target attributes.
+	 *
+	 * @param string $link_target_attrs The link target attributes.
+	 * @return string The target attribute value for the link.
+	 */
+	public static function link_target( $link_target_attrs ) {}
+
+	/**
+	 * Resolve shortcode values for URL attribute inputs.
+	 *
+	 * This resolves shortcode output before URL sanitization, so URL values are
+	 * treated as URL literals and never execute shortcode markup in HTML-attribute context.
+	 *
+	 * @since ??
+	 *
+	 * @param string $url_value Raw URL field value.
+	 *
+	 * @return string
+	 */
+	public static function resolve_url_shortcodes( string $url_value ) {}
+
+	/**
+	 * Fix shortcodes in the content by manipulating attributes and patterns.
+	 *
+	 * This function is the replacement of Divi 4 function `et_pb_fix_shortcodes`.
+	 *
+	 * @since ??
+	 *
+	 * @param string $content        The content with shortcodes to fix.
+	 * @param bool   $is_raw_content Whether the content is raw or needs additional processing.
+	 *
+	 * @return string The fixed content with adjusted shortcodes.
+	 */
+	public static function fix_shortcodes( string $content, bool $is_raw_content = false ) {}
+
+	/**
+	 * If the builder is used for the page, get rid of random p tags.
+	 *
+	 * This function is the replacement of Divi 4 function `et_pb_fix_builder_shortcodes`.
+	 *
+	 * @param string $content content.
+	 *
+	 * @return string|string[]|null
+	 */
+	public static function fix_builder_shortcodes( string $content ) {}
+
+	/**
+	 * Validate given heading level to a valid heading level.
+	 *
+	 * This function checks the given heading level against a list of valid heading levels.
+	 * If the heading level is valid, it returns the heading level.
+	 * If the heading level is not valid, it returns the default heading level.
+	 * If a default header level is not given, the default header level is `h2`.
+	 *
+	 * This function is based on legacy D4 function `et_pb_process_header_level`.
+	 *
+	 * @since ??
+	 *
+	 * @param string $new_level Heading level.
+	 * @param string $default Default heading level.
+	 *
+	 * @return string
+	 */
+	public static function validate_heading_level( string $new_level, string $default ) {}
+}
+}
+
+namespace {
+
 /**
  * Divi extension base class.
  *
@@ -12,6 +1694,7 @@
  * @subpackage API
  * @since      4.6.2
  */
+
 /**
  * Core class used to implement the Divi Extension.
  */
@@ -4507,6 +6190,9 @@ class ET_GB_Utils_Conversion {
 	public function block_to_shortcode( $serialized_block = '' ) {
 	}
 }
+
+class WC_Product_Simple {}
+
 /**
  * Simple Product Placeholder.
  *
@@ -5047,6 +6733,11 @@ class ET_Theme_Builder_Request {
 	public function get_template( $templates, $flat_settings ) {
 	}
 }
+
+class WC_Product {}
+
+class WC_Product_Variable {}
+
 /**
  * Class ET_Theme_Builder_Woocommerce_Product_Variable_Placeholder
  *
@@ -5088,6 +6779,7 @@ class ET_Theme_Builder_Woocommerce_Product_Variable_Placeholder extends \WC_Prod
 	 *
 	 * @var array
 	 */
+
 	protected static $tb_attributes;
 	/**
 	 * Create pre-filled WC Product (variable) object which acts as placeholder generator in TB
@@ -5197,6 +6889,9 @@ class ET_Theme_Builder_Woocommerce_Product_Variable_Placeholder extends \WC_Prod
 	public function get_variation_prices( $for_display = \false ) {
 	}
 }
+
+class WC_Product_Variation {}
+
 /**
  * Class ET_Theme_Builder_Woocommerce_Product_Variation_Placeholder
  *
@@ -5849,11 +7544,17 @@ abstract class ET_Core_Post_Type extends \ET_Core_Post_Object {
 	public function query() {
 	}
 }
+
+/**
+ * @var string
+ */
+const ET_TB_ITEM_POST_TYPE = '';
 /**
  * Class to handle `et_tb_item` post type.
  *
  * Registers TB Item.
  */
+
 class ET_Builder_Post_Type_TBItem extends \ET_Core_Post_Type {
 
 
@@ -5893,6 +7594,7 @@ class ET_Builder_Post_Type_TBItem extends \ET_Core_Post_Type {
 	 */
 	protected function _get_labels() {
 	}
+
 	/**
 	 * Get the class instance.
 	 *
@@ -17846,10 +19548,9 @@ class ET_Builder_Module_Helper_Woocommerce_Modules {
 	public static function get_tb_template_id_by_current_page_id( $post_id ) {
 	}
 }
+
+class ET_Builder_Module_Helper_Motion {}
 abstract class ET_Builder_Module_Helper_Motion_Sanitizer extends \ET_Builder_Module_Helper_Motion {
-
-
-
 
 	/**
 	 * @param string $value
@@ -24792,10 +26493,13 @@ class ET_Builder_Post_Taxonomy_LayoutWidth extends \ET_Core_Post_Taxonomy {
 	public static function instance( $type = 'taxonomy', $name = 'module_width' ) {
 	}
 }
+
+/**
+ * @var string
+ */
+const ET_BUILDER_LAYOUT_POST_TYPE = '';
+
 class ET_Builder_Post_Type_Layout extends \ET_Core_Post_Type {
-
-
-
 
 	/**
 	 * @inheritDoc
@@ -24812,6 +26516,7 @@ class ET_Builder_Post_Type_Layout extends \ET_Core_Post_Type {
 	/**
 	 * @inheritDoc
 	 */
+
 	public $name = ET_BUILDER_LAYOUT_POST_TYPE;
 	/**
 	 * ET_Builder_Post_Type_Layout constructor.
@@ -25617,7 +27322,7 @@ function et_builder_used_in_wc_shop() {
 /**
  * Use page.php as template for a page which uses builder & being set as shop page
  *
- * @param  string path to template
+ * @param  string $template path to template
  * @return string modified path to template
  */
 function et_builder_wc_template_include( $template ) {
@@ -31152,4 +32857,5 @@ function AdvWidgetInit() {
 }
 // end AdsenseWidget class
 function AdsenseWidgetInit() {
+}
 }
