@@ -22,6 +22,515 @@ namespace ET\Builder\Framework\DependencyManagement\Interfaces {
 	}
 }
 
+namespace ET\Builder\Packages\Module\Layout\Components {
+	/**
+	 * Module related helper class.
+	 *
+	 * @since ??
+	 */
+	class ModuleElements {
+
+		/**
+		 * Module ID
+		 *
+		 * @since ??
+		 *
+		 * @var string
+		 */
+		public $id;
+
+		/**
+		 * Module name
+		 *
+		 * @since ??
+		 *
+		 * @var string
+		 */
+		public $name;
+
+		/**
+		 * A key-value pair of module attributes data where the key is the module attribute name and the value is the formatted attribute array.
+		 *
+		 * @since ??
+		 *
+		 * @var array
+		 */
+		public $module_attrs = array();
+
+		/**
+		 * Runtime module attributes used for classnames/script-data/render decisions.
+		 *
+		 * This can differ from `$module_attrs` when style-only attr cleanup is applied.
+		 *
+		 * @since ??
+		 *
+		 * @var array
+		 */
+		public $runtime_module_attrs = array();
+
+		/**
+		 * A key-value pair of selectors where the key is the module attribute name and the value is the selector.
+		 *
+		 * @since ??
+		 *
+		 * @var array
+		 */
+		public $selectors = array();
+
+		/**
+		 * Key-value pair of module metadata (module.json config file).
+		 *
+		 * @since ??
+		 *
+		 * @var \WP_Block_Type
+		 */
+		public $module_metadata;
+
+		/**
+		 * Base order classname.
+		 *
+		 * @since ??
+		 *
+		 * @var string
+		 */
+		public $base_order_class = '';
+
+		/**
+		 * The selector class name.
+		 *
+		 * @since ??
+		 *
+		 * @var string
+		 */
+		public $order_class = '';
+
+		/**
+		 * Base wrapper order classname.
+		 *
+		 * @since ??
+		 *
+		 * @var string
+		 */
+		public $base_wrapper_order_class = '';
+
+		/**
+		 * The selector class name.
+		 *
+		 * @since ??
+		 *
+		 * @var string
+		 */
+		public $wrapper_order_class = '';
+
+		/**
+		 * Module name class name.
+		 *
+		 * @since ??
+		 *
+		 * @var string
+		 */
+		public $module_name_class = '';
+
+		/**
+		 * Module order ID.
+		 *
+		 * @since ??
+		 *
+		 * @var string
+		 */
+		public $order_id = '';
+
+		/**
+		 * Module order index.
+		 *
+		 * @since ??
+		 *
+		 * @var mixed|null
+		 */
+		public $order_index;
+
+		/**
+		 * Module store instance.
+		 *
+		 * @since ??
+		 *
+		 * @var int|null
+		 */
+		public $store_instance;
+
+		/**
+		 * Default printed styles.
+		 *
+		 * @var array
+		 */
+		public $default_printed_style_attrs = array();
+
+		/**
+		 * Preset printed styles.
+		 *
+		 * @var array
+		 */
+		public $preset_printed_style_attrs = array();
+
+		/**
+		 * Whether the module has a default render background.
+		 *
+		 * @since ??
+		 *
+		 * @var bool
+		 */
+		public $has_default_background = false;
+
+		/**
+		 * Create an instance of ModuleElements class.
+		 *
+		 * @since ??
+		 *
+		 * @param array $args {
+		 *                    Optional. An array of arguments. Default `[]`.
+		 *
+		 * @type string $id                The Module unique ID.
+		 * @type string $name              The Module name.
+		 * @type array  $moduleAttrs       A key-value pair of module attributes data where the key is
+		 *                                     the module attribute name and the value is the formatted attribute array.
+		 * @type array  $runtimeModuleAttrs Optional. Runtime module attributes for classnames/script-data/render decisions.
+		 *                                     Defaults to `moduleAttrs`.
+		 * @type array  $selectors         Optional. A key-value pair of selectors where the key is the module attribute
+		 *                                     name and the value is the selector. If not provided, the selectors will be
+		 *                                     retrieved from the module.json config file.
+		 *                                     Default `ModuleRegistration::get_selectors( $this->name )`.
+		 * @type int    $storeInstance     Optional. The ID of instance where the module object is stored in BlockParserStore.
+		 *                                     Default `null`.
+		 * @type int    $orderIndex        Optional. The order index of the module. Default `null`.
+		 * @type \WP_Block_Type|array $moduleMetadata Optional. The module metadata. Could be an instance of \WP_Block_Type or an array to be converted into \WP_Block_Type instance.
+		 * @type boolean $is_custom_post_type Optional. Whether current post type is custom post type or not. Default `false`.
+		 * @type string|null $stickyParentId Optional. Sticky parent ID. Default `null`.
+		 * @type boolean $hasDefaultBackground Optional. Whether the module has a default render background. Default `false`.
+		 * @type boolean $is_parent_flex_layout Optional. Whether parent module is flex or not. Default `false`.
+		 * @type array  $targetedAttributes Optional. Custom attributes separated by target element. Default `[]`.
+		 * }
+		 */
+		public function __construct( array $args = array() ) {}
+
+		/**
+		 * Create a new instance of the ModuleElements class with the given arguments.
+		 *
+		 * @param array $args {
+		 *                    An array of arguments.
+		 *
+		 * @type string $id          The Module unique ID.
+		 * @type string $name        The Module name.
+		 * @type string|null $stickyParentId Optional. Sticky parent ID. Default `null`.
+		 * @type array  $moduleAttrs A key-value pair of module attributes data where the key is the module attribute name
+		 *                               and the value is the formatted attribute array.
+		 * @type array  $selectors   Optional. A key-value pair of selectors where the key is the module attribute name and
+		 *                               the value is the selector.
+		 *                               If not provided, the selectors will be retrieved from the module.json config file.
+		 *                               Default `ModuleRegistration::get_selectors( $this->name )`.
+		 * }
+		 *
+		 * @return ModuleElements A new instance of the ModuleElements class.
+		 */
+		public static function create( array $args ) {}
+
+		/**
+		 * Get inside sticky module status.
+		 *
+		 * @since ??
+		 *
+		 * @return boolean Whether current module is inside another sticky module or not.
+		 */
+		public function get_is_inside_sticky_module() {}
+
+		/**
+		 * Get a sticky parent order class name.
+		 *
+		 * @since ??
+		 *
+		 * @return string|null Sticky parent order class name (e.g., 'et_pb_row_2_tb_header') or null if not inside sticky module.
+		 */
+		public function get_sticky_parent_order_class() {}
+
+		/**
+		 * Recalculate sticky parent order class if store instance is now available.
+		 *
+		 * @since ??
+		 *
+		 * @return void
+		 */
+		public function recalculate_sticky_parent_order_class() {}
+
+		/**
+		 * Get parent layout flex status.
+		 *
+		 * @since ??
+		 *
+		 * @return boolean Whether current module is parent layout flex or not.
+		 */
+		public function get_is_parent_flex_layout() {}
+
+		/**
+		 * Get parent layout grid status.
+		 *
+		 * @since ??
+		 *
+		 * @return boolean Whether current module is parent layout grid or not.
+		 */
+		public function get_is_parent_grid_layout() {}
+
+		/**
+		 * Render HTML code with specified attributes and children.
+		 *
+		 * @since ??
+		 *
+		 * @param array $args {
+		 *                    An array of arguments.
+		 *
+		 * @type string                           $tagName              Optional. HTML Element tag. Default `div`.
+		 * @type string                           $parentTag            Optional. The parent HTML Element tag where this element will be rendered. Default empty string.
+		 *                                                                  This is used to compute the required attributes for certain self-closing tags like `source` which
+		 *                                                                  needs to know the parent tag to compute the required attributes list.
+		 * @type array                            $attributes           Optional. A key-value pair array of attributes data. Default `[]`.
+		 *                                                                    - The array item key must be a string.
+		 *                                                                    - For boolean attributes, the array item value must be a `true`.
+		 *                                                                    - For key-value pair attributes, the array item value must be a MultiViewElementValue object,
+		 *                                                                      array of ModuleElementsAttr constructor arguments, int, float, string, boolean, array or null.
+		 *                                                                    - `ModuleElementsAttr` or array of ModuleElementsAttr constructor arguments value will be
+		 *                                                                       computed with multi view data.
+		 *                                                                    - `boolean` value will be stringified to avoid `true` get printed as `1` and `false` get
+		 *                                                                       printed as `0`.
+		 *                                                                    - `array` value only applicable for `style` attribute.
+		 *                                                                    - `null` value will skip the attribute to be rendered.
+		 * @type string|array|ModuleElementsAttr $children              Optional. The children element. Default `null`.
+		 *                                                                    - Pass instance of ModuleElementsAttr or array of ModuleElementsAttr constructor arguments to
+		 *                                                                      compute multi view data.
+		 *                                                                    - Pass string for single children element.
+		 *                                                                    - Pass array for multiple children elements and nested children elements.
+		 *                                                                    - Only applicable for non self-closing tags.
+		 * @type callable                         $childrenSanitizer    Optional. The function that will be invoked to sanitize/escape the children element. Default `esc_html`.
+		 * @type array                            $attributesSanitizers Optional. A key-value pair array of custom sanitizers that will be used to override the default sanitizer.
+		 *                                                                  Default `[]`.
+		 * @type string                           $attrName             Optional. The Module attribute name. Default empty string.
+		 * @type array                            $attr                 Optional. The Module formatted attribute array. Default `[]`.
+		 * @type string                           $attrSubName          Optional. The attribute sub name that will be queried. Default `null`.
+		 * @type callable                         $valueResolver        Optional. A function that will be invoked to resolve the value. Default `null`.
+		 * @type string                           $selector             Optional. The selector of element to be updated. Default `null`.
+		 * @type string                           $hoverSelector        Optional. The selector to trigger hover event. Default `null`.
+		 * @type bool                             $forceRender          Optional. Flag to keep render the HTML code even if the children element is empty
+		 *                                                                  or the required attributes in certain self-closing tags are not provided, or the module attribute that
+		 *                                                                  passed into the `hiddenIfFalsy` param has no value across all breakpoints and states is empty.
+		 *                                                                  Default `false`.
+		 * @type array|ModuleElementsAttr         $hiddenIfFalsy        Optional. Parameter that will be computed to determine if the element should be hidden if
+		 *                                                                  certain module attribute value is falsy. Default ``.
+		 *                                                                     - Array of ModuleElementsAttr constructor arguments.
+		 *                                                                     - Instance of ModuleElementsAttr.
+		 * @type string                             $elementType        Optional. The element type. Default `element`.
+		 * @type array                              $elementProps       Optional. The element props. Default `[]`.
+		 * @type bool                               $skipAttrChildren   Optional. When true, prevents automatic content generation
+		 *                                                                  from module attributes and uses explicitly provided children
+		 *                                                                  instead. Useful for self-closing tags (input, img) or elements
+		 *                                                                  with custom pre-processed content. Default false.
+		 *
+		 * }
+		 *
+		 * @return string The rendered HTML code.
+		 */
+		public function render( array $args ) {}
+
+		/**
+		 * Set base order class.
+		 *
+		 * @since ??
+		 *
+		 * @param string $base_order_class The base order class.
+		 */
+		public function set_base_order_class( string $base_order_class ) {}
+
+		/**
+		 * Set the order class.
+		 *
+		 * @since ??
+		 *
+		 * @param string $order_class The order class.
+		 *
+		 * @return void
+		 */
+		public function set_order_class( string $order_class ) {}
+		/**
+		 * Set base wrapper order class.
+		 *
+		 * @since ??
+		 *
+		 * @param string $base_wrapper_order_class The base wrapper order class.
+		 */
+		public function set_base_wrapper_order_class( string $base_wrapper_order_class ) {}
+
+		/**
+		 * Set the wrapper order class.
+		 *
+		 * @since ??
+		 *
+		 * @param string $wrapper_order_class The order class.
+		 *
+		 * @return void
+		 */
+		public function set_wrapper_order_class( string $wrapper_order_class ) {}
+
+		/**
+		 * Set module name class.
+		 *
+		 * @since ??
+		 *
+		 * @param string $module_name_class The module name class.
+		 *
+		 * @return void
+		 */
+		public function set_module_name_class( string $module_name_class ) {}
+
+		/**
+		 * Set the module order ID.
+		 *
+		 * @since ??
+		 *
+		 * @param string $order_id The order ID.
+		 *
+		 * @return void
+		 */
+		public function set_order_id( string $order_id ) {}
+
+		/**
+		 * Set module script data.
+		 *
+		 * @since ??
+		 *
+		 * @param array $args {
+		 *                    An array of arguments.
+		 *
+		 * @type string   $attrName        Optional. The attribute name declared in module.json config file. Default empty string.
+		 * @type array    $scriptDataProps Optional. A key-value pair array of script data props. Default `[]`.
+		 * @type callable $attrsResolver   Optional. A function that will be called to filter/resolve the attributes data. Default `null`.
+		 * }
+		 *
+		 * @return void
+		 */
+		public function script_data( array $args ) {}
+
+		/**
+		 * Set the style group which will be used to calculate the attributes data that will be used to render the style.
+		 *
+		 * @since ??
+		 *
+		 * @param string $group The style group.
+		 *
+		 * @return void
+		 */
+		public function set_style_group( string $group ) {}
+
+		/**
+		 * Set the preset priority for CSS rendering order.
+		 *
+		 * @since ??
+		 *
+		 * @param int $priority The preset priority.
+		 *
+		 * @return void
+		 */
+		public function set_preset_priority( int $priority ) {}
+
+		/**
+		 * Get the preset priority for CSS rendering order.
+		 *
+		 * @since ??
+		 *
+		 * @return int|null The preset priority, or null if not set.
+		 */
+		public function get_preset_priority() {}
+
+		/**
+		 * Get the current preset priority being rendered (static accessor).
+		 *
+		 * @since ??
+		 *
+		 * @return int|null The current preset priority, or null if not set.
+		 */
+		public static function get_current_preset_priority() {}
+
+		/**
+		 * Clear the current preset priority (called after preset rendering is complete).
+		 *
+		 * @since ??
+		 *
+		 * @return void
+		 */
+		public static function clear_current_preset_priority() {}
+
+		/**
+		 * Render style declaration.
+		 *
+		 * @since ??
+		 *
+		 * @param array $args {
+		 *                    An array of arguments.
+		 *
+		 * @type string $attrName   Optional. The attribute name declared in module.json config file. Default empty string.
+		 * @type array  $styleProps Optional. A key-value pair array of style props. Default `[]`.
+		 * @type bool   $isMergeRecursiveProps Optional. Whether to merge style properties recursively. Default `false`.
+		 * @type string $group      Optional. The style group. This group will be used to calculate the attributes data that will be used to render the style. Default `module`.
+		 * }
+		 *
+		 * @return string|array|null
+		 */
+		public function style( array $args ) {}
+
+		/**
+		 * Set custom module attributes.
+		 *
+		 * This method is used to set custom module attributes that will be used in the current module instance.
+		 *
+		 * @param  array $attrs An array of custom module attributes.
+		 * @return void
+		 */
+		public function use_custom_module_attrs( array $attrs ) {}
+
+		/**
+		 * Clear custom module attributes.
+		 *
+		 * This method is used to clear custom module attributes that have been set using `use_custom_module_attrs` method.
+		 *
+		 * @return void
+		 */
+		public function clear_custom_attributes() {}
+
+		/**
+		 * Render element style components.
+		 *
+		 * @since ??
+		 *
+		 * @param array $args {
+		 *                    An array of arguments.
+		 *
+		 * @type string $attrName             Optional. The attribute name declared in module.json config file. Default empty string.
+		 * @type array  $styleComponentsProps Optional. A key-value pair array of component props. Default `[]`.
+		 * }
+		 *
+		 * @return string|null
+		 */
+		public function style_components( array $args ) {}
+
+		/**
+		 * Merges module attributes with preset and group preset attributes.
+		 *
+		 * This method retrieves and merges attributes from a specified module,
+		 * its selected preset, and any applicable group presets.
+		 *
+		 * @since ??
+		 *
+		 * @return array The merged attributes array.
+		 */
+		public function get_merged_attrs() {}
+	}
+}
+
 namespace ET\Builder\Framework\DependencyManagement {
   /**
    * `DependencyTree` class is used as a utility to manage loading classes in a meaningful manner.
@@ -359,7 +868,7 @@ namespace ET\Builder\Packages\ModuleLibrary {
 		 *                                 Accepts any public property of `WP_Block_Type`. See
 		 *                                 `WP_Block_Type::__construct()` for more information on accepted arguments.
 		 *
-		 * @return WP_Block_Type|null The registered block type or `null` if the metadata file does not exist or cannot be
+		 * @return \WP_Block_Type|null The registered block type or `null` if the metadata file does not exist or cannot be
 		 *                            decoded.
 		 *
 		 * @throws \Exception If the metadata file cannot be read or decoded.
@@ -389,7 +898,7 @@ namespace ET\Builder\Packages\ModuleLibrary {
 		 * @param string $block_type    Block type name including namespace prefix.
 		 * @param string $metadata_file Path to the block metadata file.
 		 * @param array  $metadata      Block type metadata.
-		 * @return WP_Block_Type|false The registered block type on success, or false on failure.
+		 * @return \WP_Block_Type|false The registered block type on success, or false on failure.
 		 */
 		public static function register_block_type_from_metadata( $block_type, $metadata_file, $metadata = array() ) {}
 
@@ -422,7 +931,7 @@ namespace ET\Builder\Packages\ModuleLibrary {
 		 *
 		 * @since ??
 		 *
-		 * @param WP_Block_Parser_Block $parent_block The parent block object returned by BlockParserStore::get_parent().
+		 * @param \WP_Block_Parser_Block $parent_block The parent block object returned by BlockParserStore::get_parent().
 		 *
 		 * @return array Fully resolved parent attributes:
 		 *              defaults → preset render attrs → raw saved attrs (raw attrs win).
@@ -506,7 +1015,7 @@ namespace ET\Builder\Packages\ModuleLibrary {
 		 * @since ??
 		 *
 		 * @param string $module_name The name of the module to retrieve settings for.
-		 * @return WP_Block_Type|null The module settings if found, or null if the module is not registered.
+		 * @return \WP_Block_Type|null The module settings if found, or null if the module is not registered.
 		 */
 		public static function get_module_settings( $module_name ) {}
 
@@ -2200,7 +2709,7 @@ class ET_Api_Rest_Block_Layout {
 	 *
 	 * @since 4.1.0
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param \WP_REST_Request $request Full details about the request.
 	 *
 	 * @return string|WP_Error
 	 */
@@ -2209,7 +2718,7 @@ class ET_Api_Rest_Block_Layout {
 	/**
 	 *  Process /block/layout/builder_edit_data route request
 	 *
-	 * @param WP_Rest_Request $request Request to prepare items for.
+	 * @param \WP_Rest_Request $request Request to prepare items for.
 	 *
 	 * @return string|WP_Error
 	 * @since  4.1.0
@@ -2911,7 +3420,7 @@ class ET_Builder_Plugin_Compat_Base {
 	/**
 	 * Get plugin dir path based on plugin_id
 	 *
-	 * @return sting
+	 * @return string
 	 */
 	function get_plugin_dir_path() {
 	}
@@ -2982,7 +3491,7 @@ class ET_Builder_Theme_Compat_Base {
 	/**
 	 * Get theme dir path based on theme_id.
 	 *
-	 * @return sting
+	 * @return string
 	 */
 	public function get_theme_dir_path() {
 	}
@@ -3395,7 +3904,7 @@ class ET_Builder_Block_Editor_Integration {
 	/**
 	 * Return whether the post can be edited in the block editor.
 	 *
-	 * @param mixed $post Post ID or WP_Post object.
+	 * @param mixed $post Post ID or \WP_Post object.
 	 *
 	 * @return bool
 	 */
@@ -5897,7 +6406,7 @@ class ET_GB_Editor_Typography {
 	/**
 	 * TB's body layout post
 	 *
-	 * @var WP_Post
+	 * @var \WP_Post
 	 */
 	private $_body_layout_post;
 	/**
@@ -5935,7 +6444,7 @@ class ET_GB_Editor_Typography {
 	 * Filter editor styles pass to the GB editor.
 	 *
 	 * @param array                   $editor_settings      editor settings.
-	 * @param WP_Block_Editor_Context $block_editor_context The current block editor context.
+	 * @param \WP_Block_Editor_Context $block_editor_context The current block editor context.
 	 *
 	 * @return mixed
 	 */
@@ -6124,6 +6633,7 @@ class ET_GB_Block_Layout {
 	 * @since 4.4.1 don't overwrite `p` and `post_type` query vars if homepage displays static page
 	 *
 	 * @param object
+	 * 
 	 */
 	public function modify_layout_content_condition( $query ) {
 	}
@@ -6181,7 +6691,7 @@ class ET_GB_Block_Layout {
 	 *
 	 * @since 4.14.8
 	 *
-	 * @return WP_Block_Template|null Template. Return null if it doesn't exist.
+	 * @return \WP_Block_Template|null Template. Return null if it doesn't exist.
 	 */
 	public function get_wp_editor_template_on_render() {
 	}
@@ -6426,7 +6936,7 @@ class ET_Theme_Builder_Local_Library_Item {
 	/**
 	 * The library item post.
 	 *
-	 * @var WP_Post|null
+	 * @var \WP_Post|null
 	 */
 	public $item_post = \null;
 	/**
@@ -6542,7 +7052,7 @@ class ET_Theme_Builder_Local_Library_Item {
 	/**
 	 * Gets the item title field formatted to be displayed in Theme Builder.
 	 *
-	 * @return int|WP_Error Valid Post ID on success. 0 or WP_Error on failure.
+	 * @return int|WP_Error Valid Post ID on success. 0 or \WP_Error on failure.
 	 */
 	public function duplicate_template_item() {
 	}
@@ -7114,12 +7624,12 @@ class ET_Core_Post_Query {
 	 * The query result.
 	 *
 	 * @since 3.0.99
-	 * @var   WP_Post|WP_Post[]
+	 * @var   \WP_Post|WP_Post[]
 	 */
 	protected $_query_result;
 
 	/**
-	 * The args that will be passed to {@see WP_Query} the next time {@see self::run()} is called.
+	 * The args that will be passed to {@see \WP_Query} the next time {@see self::run()} is called.
 	 *
 	 * @since 3.0.99
 	 * @var   array
@@ -7236,9 +7746,9 @@ class ET_Core_Post_Query {
 	 *
 	 * @since 3.0.99
 	 *
-	 * @param array $args Optional. Additional arguments for {@see WP_Query}.
+	 * @param array $args Optional. Additional arguments for {@see \WP_Query}.
 	 *
-	 * @return WP_Post|WP_Post[] $posts
+	 * @return \WP_Post|WP_Post[] $posts
 	 */
 	public function run( $args = array() ) {
 	}
@@ -7282,7 +7792,7 @@ class ET_Core_Post_Query {
 /**
  * Class to handle `et_tb_item` query.
  *
- * Think of this class as WP_Query for ET_TB_ITEM_POST_TYPE.
+ * Think of this class as \WP_Query for ET_TB_ITEM_POST_TYPE.
  */
 class ET_Builder_Post_Query_TBItems extends \ET_Core_Post_Query {
 
@@ -7316,7 +7826,7 @@ abstract class ET_Core_Post_Taxonomy extends \ET_Core_Post_Object {
 	 * The WP Taxonomy object for this instance.
 	 *
 	 * @since 3.0.99
-	 * @var   WP_Taxonomy
+	 * @var   \WP_Taxonomy
 	 */
 	protected $_wp_object;
 
@@ -7339,7 +7849,7 @@ abstract class ET_Core_Post_Taxonomy extends \ET_Core_Post_Object {
 	/**
 	 * This taxonomy's terms.
 	 *
-	 * @var WP_Term[]
+	 * @var \WP_Term[]
 	 */
 	public $terms;
 
@@ -7581,7 +8091,7 @@ abstract class ET_Core_Post_Object {
 	 * The WP object for this instance.
 	 *
 	 * @since 3.0.99
-	 * @var   WP_Post_Type|WP_Taxonomy
+	 * @var   \WP_Post_Type|WP_Taxonomy
 	 */
 	protected $_wp_object;
 
@@ -7699,7 +8209,7 @@ abstract class ET_Core_Post_Type extends \ET_Core_Post_Object {
 	 * The WP Post Type object for this instance.
 	 *
 	 * @since 3.0.99
-	 * @var   WP_Post_Type
+	 * @var   \WP_Post_Type
 	 */
 	protected $_wp_object;
 
@@ -7880,7 +8390,7 @@ abstract class ET_Item_Library_Local {
 	 *
 	 * @since 4.18.0
 	 *
-	 * @param WP_POST $post          Unprocessed item.
+	 * @param \WP_POST $post          Unprocessed item.
 	 * @param object  $item          Currently processing item.
 	 * @param int     $index         The item's index position.
 	 * @param array[] $item_terms    Processed items.
@@ -17805,7 +18315,7 @@ class ET_Builder_Module_Helper_MultiViewOptions {
 	 * @type string $attr_sub_key Attribute sub key that available when passing attrs value as array such as styes. Example: padding-top, margin-bottom, etc.
 	 * }
 	 *
-	 * @return mixed|WP_Error return WP_Error to skip the data.
+	 * @return mixed|WP_Error return \WP_Error to skip the data.
 	 */
 	protected function filter_value( $raw_value, $args = array() ) {
 	}
@@ -19258,7 +19768,7 @@ class ET_Builder_Module_Helper_Woocommerce_Modules {
 	 *
 	 * @param string $maybe_product_id The Value stored in the Product attribute using VB.
 	 *
-	 * @return int WP_Product ID.
+	 * @return int \WP_Product ID.
 	 */
 	public static function get_product_id( $maybe_product_id ) {
 	}
@@ -19292,7 +19802,7 @@ class ET_Builder_Module_Helper_Woocommerce_Modules {
 	 * @since 3.29
 	 *
 	 * @param WC_Product   $product  The Product Post.
-	 * @param WP_Comment[] $comments Array of Comment objects.
+	 * @param \WP_Comment[] $comments Array of Comment objects.
 	 *
 	 * @return string
 	 */
@@ -23103,7 +23613,7 @@ class ET_Builder_Module_Woocommerce_Related_Products extends \ET_Builder_Module 
 	public static function set_related_products_categories( $term_ids ) {
 	}
 	/**
-	 * Appends offset to the WP_Query that retrieves Products.
+	 * Appends offset to the \WP_Query that retrieves Products.
 	 *
 	 * @since 4.14.0
 	 *
@@ -23313,7 +23823,7 @@ class ET_Builder_Module_Shop extends \ET_Builder_Module_Type_PostBased {
 	 * However this filter turned out to be no good with the total count in this case.
 	 *
 	 * #2 Approach (that had no success)
-	 * WP_Query's `no_found_rows` query var should be unset when pagination is turned on.
+	 * \WP_Query's `no_found_rows` query var should be unset when pagination is turned on.
 	 * This approach failed to show the correct count when Sorting was used
 	 * but worked as expected when sorting wasn't used.
 	 *
@@ -23324,7 +23834,7 @@ class ET_Builder_Module_Shop extends \ET_Builder_Module_Type_PostBased {
 	public static function adjust_offset_pagination( $results ) {
 	}
 	/**
-	 * Appends offset to the WP_Query that retrieves Products.
+	 * Appends offset to the \WP_Query that retrieves Products.
 	 *
 	 * @since 4.14.0
 	 *
@@ -23410,7 +23920,7 @@ class ET_Builder_Module_Shop extends \ET_Builder_Module_Type_PostBased {
 	/**
 	 * Filter the vendors products query arguments on vendor archive page.
 	 *
-	 * @param array $query_args WP_Query arguments.
+	 * @param array $query_args \WP_Query arguments.
 	 *
 	 * @return array
 	 */
@@ -23421,7 +23931,7 @@ class ET_Builder_Module_Shop extends \ET_Builder_Module_Type_PostBased {
 	 *
 	 * @since 4.0.8
 	 *
-	 * @param WP_Query $query WP QUERY object.
+	 * @param \WP_Query $query WP QUERY object.
 	 */
 	public function apply_woo_widget_filters( $query ) {
 	}
@@ -23494,7 +24004,7 @@ class ET_Builder_Module_Woocommerce_Tabs extends \ET_Builder_Module_Tabs {
 	 * @since 3.29
 	 * @since 4.4.2   Fix to include Custom tabs.
 	 *
-	 * @global WP_Post    $post    WordPress Post.
+	 * @global \WP_Post    $post    WordPress Post.
 	 * @global WC_Product $product WooCommerce Product.
 	 *
 	 * @return array
@@ -23656,7 +24166,7 @@ class ET_Builder_Module_Woocommerce_Upsells extends \ET_Builder_Module {
 	public function get_fields() {
 	}
 	/**
-	 * Appends offset to the WP_Query that retrieves Products.
+	 * Appends offset to the \WP_Query that retrieves Products.
 	 *
 	 * @since 4.14.0
 	 *
@@ -25244,9 +25754,9 @@ class ET_Builder_Plugin_Compat_Relevanssi extends \ET_Builder_Plugin_Compat_Base
 	 *
 	 * @since 4.7.0
 	 *
-	 * @param WP_Query $query Main blog query.
+	 * @param \WP_Query $query Main blog query.
 	 *
-	 * @return WP_Query Modified blog query.
+	 * @return \WP_Query Modified blog query.
 	 */
 	public function maybe_modify_blog_query( $query ) {
 	}
@@ -25673,7 +26183,7 @@ class ET_Builder_Plugin_Compat_The_Events_Calendar_Community_Events extends \ET_
 	 *
 	 * Restore global $pages content on TB layouts when they override the template.
 	 *
-	 * @param WP_Post $post
+	 * @param \WP_Post $post
 	 *
 	 * @return void
 	 */
@@ -25974,7 +26484,7 @@ class ET_Builder_Plugin_Compat_WordPress_SEO extends \ET_Builder_Plugin_Compat_B
 	 * modules so that they are loaded before Yoast generates the sitemap.
 	 * {@see 'pre_get_posts' (0) Must run before Yoast's callback which has priority of 1.}
 	 *
-	 * @param WP_Query $query
+	 * @param \WP_Query $query
 	 */
 	public function maybe_load_builder_modules_early( $query ) {
 	}
@@ -26328,7 +26838,7 @@ class ET_Post_Stack {
 	 *
 	 * @param integer $offset Offset from the end of the array, 0 being the last post. Use negative integers.
 	 *
-	 * @return WP_Post|null
+	 * @return \WP_Post|null
 	 */
 	public static function get( $offset = 0 ) {
 	}
@@ -26346,7 +26856,7 @@ class ET_Post_Stack {
 	 *
 	 * @since 4.0
 	 *
-	 * @param WP_Post|null $with
+	 * @param \WP_Post|null $with
 	 * @param boolean      $force
 	 *
 	 * @return void
@@ -26359,7 +26869,7 @@ class ET_Post_Stack {
 	 *
 	 * @since 4.0
 	 *
-	 * @param WP_Post $with
+	 * @param \WP_Post $with
 	 *
 	 * @return void
 	 */
@@ -26390,7 +26900,7 @@ class ET_Post_Stack {
 	 *
 	 * @since 4.0
 	 *
-	 * @return WP_Post|null
+	 * @return \WP_Post|null
 	 */
 	public static function get_main_post() {
 	}
@@ -28150,7 +28660,7 @@ function et_pb_heartbeat_post_modified( $response ) {
  * WordPress is released under the GPL
  *
  * @param  array $post_data Associative array of the submitted post data.
- * @return mixed The value 0 or WP_Error on failure. The saved post ID on success.
+ * @return mixed The value 0 or \WP_Error on failure. The saved post ID on success.
  *               The ID can be the draft post_id or the autosave revision post_id.
  */
 function et_fb_autosave( $post_data ) {
@@ -28630,7 +29140,7 @@ function et_pb_register_builder_portabilities() {
  *
  * @since To define
  *
- * @param WP_Query $query portability query.
+ * @param \WP_Query $query portability query.
  *
  * @return string New query.
  */
@@ -29380,7 +29890,7 @@ function et_builder_portability_link( $context, $attributes = array() ) {
  *
  * @since 3.26.7
  *
- * @return WP_Post_Type[]
+ * @return \WP_Post_Type[]
  */
 function et_builder_get_public_post_types() {
 }
@@ -29432,7 +29942,7 @@ function et_filter_wp_generate_attachment_metadata( $metadata, $attachment_id = 
  *
  * @since 4.0
  *
- * @param WP_Query $query Query object.
+ * @param \WP_Query $query Query object.
  *
  * @return void
  */
@@ -30693,7 +31203,7 @@ function et_builder_wc_set_initial_content( $maybe_shortcode_content, $post_id )
  * The content is stored as post meta w/ the key `_et_pb_old_content`.
  *
  * @param int     $post_id Post id.
- * @param WP_Post $post    Post Object.
+ * @param \WP_Post $post    Post Object.
  * @param array   $request The $_POST Request variables.
  *
  * @since 3.29
@@ -30705,7 +31215,7 @@ function et_builder_wc_long_description_metabox_save( $post_id, $post, $request 
  *
  * @since 3.29
  *
- * @param WP_Post $post Post.
+ * @param \WP_Post $post Post.
  */
 function et_builder_wc_long_description_metabox_render( $post ) {
 }
@@ -30714,7 +31224,7 @@ function et_builder_wc_long_description_metabox_render( $post ) {
  *
  * @since 3.29
  *
- * @param WP_Post $post WP Post.
+ * @param \WP_Post $post WP Post.
  */
 function et_builder_wc_long_description_metabox_register( $post ) {
 }
@@ -30863,7 +31373,7 @@ function et_builder_wc_override_default_layout() {
  * @since 3.29
  *
  * @param bool    $flag Whether to skips the content activation.
- * @param WP_Post $post Post.
+ * @param \WP_Post $post Post.
  *
  * @return bool
  */
@@ -31027,7 +31537,7 @@ function et_builder_wc_parse_description( $description ) {
  *
  * @since 4.14.0
  *
- * @param WP_Post $post Post Object.
+ * @param \WP_Post $post Post Object.
  */
 function et_builder_wc_delete_post_meta( $post ) {
 }
@@ -31255,8 +31765,8 @@ function et_pb_content_main_query( $content ) {
  * @param array       $classes    classname
  * @param string      $comment    comma separated list of additional classes
  * @param int         $comment_ID comment ID
- * @param WP_Comment  $comment    comment object
- * @param int|WP_Post $post_id    post ID or WP_Post object
+ * @param \WP_Comment  $comment    comment object
+ * @param int|WP_Post $post_id    post ID or \WP_Post object
  *
  * @return array modified classname
  */
@@ -31347,7 +31857,7 @@ function et_builder_set_comments_number() {
 /**
  * Generate Dummy comment for Comments Module preview in Theme Builder.
  *
- * @return WP_Comment[]
+ * @return \WP_Comment[]
  */
 function et_builder_add_fake_comments() {
 }
@@ -31753,7 +32263,7 @@ function et_theme_builder_get_terms( $tax_name ) {
  * @since 4.18.0
  *
  * @param  int|WP_Post $item Library item post ID or object.
- * @return string|WP_Error The library item type. WP_Error on failure.
+ * @return string|WP_Error The library item type. \WP_Error on failure.
  */
 function et_theme_builder_get_library_item_type( $item ) {
 }
@@ -31762,8 +32272,8 @@ function et_theme_builder_get_library_item_type( $item ) {
  *
  * @since 4.18.0
  *
- * @param  int|WP_Post $item Library item's post ID or WP_Post object.
- * @return WP_Post|WP_Error The library item post object. WP_Error on failure.
+ * @param  int|WP_Post $item Library item's post ID or \WP_Post object.
+ * @return \WP_Post|WP_Error The library item post object. \WP_Error on failure.
  */
 function et_theme_builder_get_library_item_post( $item ) {
 }
@@ -31782,7 +32292,7 @@ function et_theme_builder_insert_library_theme_builder() {
  *
  * @since 4.18.0
  *
- * @param WP_Post $template_post  The template post.
+ * @param \WP_Post $template_post  The template post.
  * @param array   $global_layouts Optional. Array containing the necessary params.
  *                                $params = [
  *                                'header' => (int|string) Header Layout ID. `use_global` string when TB global layout (relink option) is to be used.
@@ -31790,7 +32300,7 @@ function et_theme_builder_insert_library_theme_builder() {
  *                                'footer' => (int|string) Footer Layout ID. `use_global` string when TB global layout (relink option) is to be used.
  *                                ]
  *
- * @return array|WP_Error An array of the created layout post ids. WP_Error on failure.
+ * @return array|WP_Error An array of the created layout post ids. \WP_Error on failure.
  */
 function et_theme_builder_create_layouts_from_library_template( $template_post, $global_layouts = array() ) {
 }
@@ -31800,7 +32310,7 @@ function et_theme_builder_create_layouts_from_library_template( $template_post, 
  *
  * @since 4.18.0
  *
- * @param  WP_Post $item_post      The library item post object.
+ * @param  \WP_Post $item_post      The library item post object.
  * @param  array   $global_layouts Array of global layouts.
  * @return int|bool The template id on success. false on failure.
  */
@@ -32537,7 +33047,7 @@ function et_theme_builder_wc_set_review_metadata( $value, $object_id, $meta_key,
  *
  * @since 4.0.10
  *
- * @param WP_Term[]|WP_Error $terms    Array of attached terms, or WP_Error on failure.
+ * @param \WP_Term[]|WP_Error $terms    Array of attached terms, or \WP_Error on failure.
  * @param int                $post_id  Post ID.
  * @param string             $taxonomy Name of the taxonomy.
  *
