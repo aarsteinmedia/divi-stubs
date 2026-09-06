@@ -22,6 +22,74 @@ namespace ET\Builder\Framework\DependencyManagement\Interfaces {
 	}
 }
 
+namespace ET\Builder\Framework\DependencyManagement {
+  /**
+   * `DependencyTree` class is used as a utility to manage loading classes in a meaningful manner.
+   *
+   * Any class passed to `DependencyTree` should implement `DependencyInterface`.
+   *
+   * @since ??
+   */
+  class DependencyTree {
+
+    /**
+     * Stores dependencies that was passed to constructor.
+     *
+     * @var array
+     *
+     * @since ??
+     */
+    private $_dependency_tree = [];
+
+    /**
+     * Add a new dependency to the dependency tree.
+     *
+     * @param \ET\Builder\Framework\DependencyManagement\Interfaces\DependencyInterface $dependency Dependency class.
+     *
+     * @since ??
+     *
+     * @return void
+     *
+     * @example:
+     * ```php
+     * $dependency_tree = new DependencyTree();
+     *
+     * $dependency_tree->add_dependency( new DynamicContentOptionProductTitle() );
+     * $dependency_tree->add_dependency( new DynamicContentOptionPostTitle() );
+     * $dependency_tree->add_dependency( new DynamicContentOptionPostExcerpt() );
+     *
+     * // ... Add more dependencies ...
+     * ```
+     */
+    public function add_dependency( \ET\Builder\Framework\DependencyManagement\Interfaces\DependencyInterface $dependency ) {}
+
+    /**
+     * Loads all the dependencies registered in the dependency tree.
+     *
+     * This function iterates through the dependency tree and loads each dependency
+     * by calling the `load()` method on each dependency object.
+     *
+     * @since ??
+     *
+     * @return void
+     *
+     * @example:
+     * ```php
+     * $dependency_tree = new DependencyTree();
+     *
+     * $dependency_tree->add_dependency( new DynamicContentOptionProductTitle() );
+     * $dependency_tree->add_dependency( new DynamicContentOptionPostTitle() );
+     * $dependency_tree->add_dependency( new DynamicContentOptionPostExcerpt() );
+     *
+     * // ... Add more dependencies ...
+     *
+     * $dependency_tree->load_dependencies();
+     * ```
+     */
+    public function load_dependencies() {}
+  }
+}
+
 namespace ET\Builder\VisualBuilder\Assets {
 	class PackageBuildManager implements \ET\Builder\Framework\DependencyManagement\Interfaces\DependencyInterface {
 		/**
